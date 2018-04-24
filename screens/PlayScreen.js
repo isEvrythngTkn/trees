@@ -1,6 +1,6 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import { View, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export default class PlayScreen extends React.Component {
   static navigationOptions = {
@@ -8,20 +8,19 @@ export default class PlayScreen extends React.Component {
   };
 
   render() {
+    const { containerStyle } = styles;
     return (
-      <ScrollView style={styles.container}>
-        {/* Go ahead and delete ExpoLinksView and replace it with your
-           * content, we just wanted to provide you with some helpful links */}
-        <ExpoLinksView />
-      </ScrollView>
+      <View style={containerStyle}>
+        <Text>Needs a title/instrutions, a text input, and a button</Text>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  containerStyle: {
     flex: 1,
-    paddingTop: 15,
+    padding: 15,
     backgroundColor: '#fff',
   },
 });
