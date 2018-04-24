@@ -1,3 +1,5 @@
+/// @source: https://reactnavigation.org/docs/auth-flow.html
+
 import React from 'react';
 import {
   ActivityIndicator,
