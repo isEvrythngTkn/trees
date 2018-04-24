@@ -1,11 +1,12 @@
 import React from 'react';
 import {
+  AsyncStorage,
   Image,
   Platform,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
+  Button,
   View,
 } from 'react-native';
 import { WebBrowser } from 'expo';
@@ -28,11 +29,19 @@ export default class HomeScreen extends React.Component {
               source={require('../assets/images/logo-icon.png')}
               style={welcomeImage}
             />
+            <Button title="Logout" onPress={this._signOutAsync} />
           </View>
         </ScrollView>
       </View>
     );
   }
+
+  // @TODO: This will need to be moved out of here, 
+  // but for now it's useful for development purposes 
+  _signOutAsync = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate('Auth');
+  };
 }
 
 const styles = StyleSheet.create({
