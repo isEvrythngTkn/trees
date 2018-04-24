@@ -1,11 +1,15 @@
 import { Notifications } from 'expo';
 import React from 'react';
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, SwitchNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
+import SignInScreen from '../screens/SignInScreen';
+import AuthLoadingScreen from '../screens/AuthLoadingScreen'
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
-const RootStackNavigator = StackNavigator(
+
+
+const AppStackNavigator = StackNavigator(
   {
     Main: {
       screen: MainTabNavigator,
@@ -19,6 +23,16 @@ const RootStackNavigator = StackNavigator(
     }),
   }
 );
+
+const AuthStackNavigator = StackNavigator({ SignIn: SignInScreen });
+
+const RootStackNavigator = SwitchNavigator({
+  AuthLoading: AuthLoadingScreen,
+  App: AppStackNavigator,
+  Auth: AuthStackNavigator
+}, {
+  initialRouteName: 'AuthLoading',
+});
 
 export default class RootNavigator extends React.Component {
   componentDidMount() {
