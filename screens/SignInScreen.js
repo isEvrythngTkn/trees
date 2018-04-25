@@ -18,16 +18,16 @@ class SignInScreen extends React.Component {
     title: 'Please sign in',
   };
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.user) {
-      this._signInAsync();
-    }
+  componentWillReceiveProps() {
+    const userToken = this._asyncGetUserFromStorage();
   }
 
-  _signInAsync = async () => {
-    await AsyncStorage.setItem('userToken', 'abc');
-    this.props.navigation.navigate('App');
-  };
+  _asyncGetUserFromStorage = async () => {
+    const userToken = await AsyncStorage.getItem('userToken');
+    if (userToken) {
+      this.props.navigation.navigate('App');
+    }
+  }
 
   onEmailChange(text) {
     this.props.emailChanged(text);

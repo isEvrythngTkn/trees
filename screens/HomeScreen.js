@@ -9,14 +9,20 @@ import {
   Button,
   View,
 } from 'react-native';
+import { connect } from 'react-redux';
 import { WebBrowser } from 'expo';
-
 import { MonoText } from '../components/StyledText';
+import { logoutUser } from '../redux/actions';
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
+
+  onSignoutButtonPress() {
+    this.props.logoutUser();
+    this.props.navigation.navigate('Auth');
+  }
 
   render() {
     const { container, welcomeContainer, treesTitle, welcomeImage, contentContainer } = styles;
@@ -29,19 +35,12 @@ export default class HomeScreen extends React.Component {
               source={require('../assets/images/logo-icon.png')}
               style={welcomeImage}
             />
-            <Button title="Logout" onPress={this._signOutAsync} />
+            <Button title="Logout" onPress={this.onSignoutButtonPress.bind(this)} />
           </View>
         </ScrollView>
       </View>
     );
   }
-
-  // @TODO: This will need to be moved out of here, 
-  // but for now it's useful for development purposes 
-  _signOutAsync = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate('Auth');
-  };
 }
 
 const styles = StyleSheet.create({
@@ -75,3 +74,13 @@ const styles = StyleSheet.create({
     marginLeft: -10,
   }
 });
+
+const mapStateToProps = state => {
+  console.log('state', state);
+  const { user } = state.auth;
+  return {
+    user
+  };
+};
+
+export default connect(mapStateToProps, { logoutUser })(HomeScreen);

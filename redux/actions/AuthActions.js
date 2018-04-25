@@ -3,7 +3,8 @@ import {
   PASSWORD_CHANGED,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
-  LOGIN_USER
+  LOGIN_USER,
+  LOGOUT_USER
 } from './types';
 import { register, login } from '../../api/firebase';
 
@@ -45,3 +46,11 @@ const loginUserSuccess = (dispatch, user) => {
   console.log('loginUserSuccess')
   dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
 };
+
+export const logoutUser = () => {
+  return {
+    type: LOGOUT_USER,
+    payload: null
+  };
+};
+
