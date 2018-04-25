@@ -1,8 +1,10 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import RootNavigation from './navigation/RootNavigation';
+import store from './redux/store';
 
 export default class App extends React.Component {
   state = {
@@ -22,7 +24,9 @@ export default class App extends React.Component {
       return (
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <RootNavigation />
+          <Provider store={store}>
+            <RootNavigation />
+          </Provider>
         </View>
       );
     }

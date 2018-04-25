@@ -8,13 +8,23 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+import { connect } from 'react-redux';
 import { Card, FormLabel, FormInput, Button } from 'react-native-elements';
 import { StackNavigator, SwitchNavigator } from 'react-navigation'; // Version can be specified in package.json
+import { emailChanged, passwordChanged } from '../redux/actions';
 
 class SignInScreen extends React.Component {
   static navigationOptions = {
     title: 'Please sign in',
   };
+
+  onEmailChange(text) {
+    this.props.emailChanged(text);
+  }
+
+  onPasswordChange(text) {
+    this.props.passwordChanged(text);
+  }
 
   render() {
     return (
@@ -22,11 +32,17 @@ class SignInScreen extends React.Component {
         <Card>
           <FormLabel>Email</FormLabel>
           <FormInput
+            placeholder="jane@example.com"
             keyboardType='email-address'
+            onChangeText={this.onEmailChange.bind(this)}
+            value={this.props.email}
           />
 
           <FormLabel>Password</FormLabel>
           <FormInput
+            placeholder="password"
+            onChangeText={this.onPasswordChange.bind(this)}
+            value={this.props.password}
             secureTextEntry
           />
 
@@ -50,4 +66,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignInScreen;
+const mapStateToProps = state => {
+    const { email, password } = state.auth;
+    return {
+        email,
+        password
+    };
+};
+
+export default connect(mapStateToProps, {
+  emailChanged,
+  passwordChanged
+})(SignInScreen);
