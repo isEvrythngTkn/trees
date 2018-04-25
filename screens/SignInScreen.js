@@ -4,11 +4,11 @@ import React from 'react';
 import {
   ActivityIndicator,
   AsyncStorage,
-  Button,
   StatusBar,
   StyleSheet,
   View,
 } from 'react-native';
+import { Card, FormLabel, FormInput, Button } from 'react-native-elements';
 import { StackNavigator, SwitchNavigator } from 'react-navigation'; // Version can be specified in package.json
 
 class SignInScreen extends React.Component {
@@ -19,7 +19,19 @@ class SignInScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Button title="Sign in!" onPress={this._signInAsync} />
+        <Card>
+          <FormLabel>Email</FormLabel>
+          <FormInput
+            keyboardType='email-address'
+          />
+
+          <FormLabel>Password</FormLabel>
+          <FormInput
+            secureTextEntry
+          />
+
+          <Button title="Sign in!" onPress={this._signInAsync} />
+        </Card>
       </View>
     );
   }
