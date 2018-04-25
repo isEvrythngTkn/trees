@@ -11,11 +11,22 @@ import {
 import { connect } from 'react-redux';
 import { Card, FormLabel, FormInput, Button } from 'react-native-elements';
 import { StackNavigator, SwitchNavigator } from 'react-navigation'; // Version can be specified in package.json
-import { emailChanged, passwordChanged } from '../redux/actions';
+import { emailChanged, passwordChanged, loginUser } from '../redux/actions';
 
 class SignInScreen extends React.Component {
   static navigationOptions = {
     title: 'Please sign in',
+  };
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.user) {
+      this._signInAsync();
+    }
+  }
+
+  _signInAsync = async () => {
+    await AsyncStorage.setItem('userToken', 'abc');
+    this.props.navigation.navigate('App');
   };
 
   onEmailChange(text) {
@@ -24,6 +35,12 @@ class SignInScreen extends React.Component {
 
   onPasswordChange(text) {
     this.props.passwordChanged(text);
+  }
+
+  onButtonPress() {
+    const { email, password } = this.props;
+
+    this.props.loginUser({ email, password });
   }
 
   render() {
@@ -46,16 +63,11 @@ class SignInScreen extends React.Component {
             secureTextEntry
           />
 
-          <Button title="Sign in!" onPress={this._signInAsync} />
+          <Button title="Sign in!" onPress={this.onButtonPress.bind(this)} />
         </Card>
       </View>
     );
   }
-
-  _signInAsync = async () => {
-    await AsyncStorage.setItem('userToken', 'abc');
-    this.props.navigation.navigate('App');
-  };
 }
 
 const styles = StyleSheet.create({
@@ -67,14 +79,16 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-    const { email, password } = state.auth;
+    const { email, password, user } = state.auth;
     return {
         email,
-        password
+        password,
+        user
     };
 };
 
 export default connect(mapStateToProps, {
   emailChanged,
-  passwordChanged
+  passwordChanged,
+  loginUser
 })(SignInScreen);

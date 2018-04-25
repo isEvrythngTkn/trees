@@ -1,28 +1,47 @@
-import firebase from 'firebase';
 import { 
-    EMAIL_CHANGED, 
-    PASSWORD_CHANGED,
-    LOGIN_USER_SUCCESS,
-    LOGIN_USER_FAIL,
-    LOGIN_USER
+  EMAIL_CHANGED, 
+  PASSWORD_CHANGED,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_FAIL,
+  LOGIN_USER
 } from './types';
+import { register, login } from '../../api/firebase';
 
 export const emailChanged = (text) => {
-    return {
-        type: EMAIL_CHANGED,
-        payload: text
-    };
+  return {
+    type: EMAIL_CHANGED,
+    payload: text
+  };
 };
 
 export const passwordChanged = (text) => {
-    return {
-        type: PASSWORD_CHANGED,
-        payload: text
-    };
+  return {
+    type: PASSWORD_CHANGED,
+    payload: text
+  };
 };
 
-export const loginUser = ({ email, password }) => {};
+export const loginUser = ({ email, password }) => {
+  console.log('Login');
+  return (dispatch) => {
+    dispatch({ type: LOGIN_USER });
 
-const loginUserFail = (dispatch) => {};
+    login({ email, password })
+      .then(user => loginUserSuccess(dispatch, user))
+      .catch(() => {
+        register({ email, password })
+          .then(user => loginUserSuccess(dispatch, user))
+          .catch(() => loginUserFail(dispatch));
+      });
+  };
+};
 
-const loginUserSuccess = (dispatch, user) => {};
+const loginUserFail = (dispatch) => {
+  console.log('loginUserFail');
+  dispatch({ type: LOGIN_USER_FAIL });
+};
+
+const loginUserSuccess = (dispatch, user) => {
+  console.log('loginUserSuccess')
+  dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
+};
