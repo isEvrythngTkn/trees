@@ -8,3 +8,4 @@ export const LOGOUT_USER = 'logout_user';
 export const USER_PLAYING = 'user_playing';
 export const USER_LOSE = 'user_lose';
 export const USER_WIN = 'user_win';
+export const PLAY_AGAIN = 'play_again';

@@ -1,7 +1,8 @@
 import { 
   USER_PLAYING,
   USER_LOSE,
-  USER_WIN
+  USER_WIN,
+  PLAY_AGAIN
 } from './types';
 
 export const userPlays = (text) => {
@@ -23,4 +24,11 @@ export const userLoses = (text) => {
     type: USER_LOSE,
     payload: 0
   };
+}
+
+export const playAgain = () => {
+  return {
+    type: PLAY_AGAIN,
+    payload: null
+  }
 }

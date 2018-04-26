@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
+import { Button } from 'react-native-elements';
 import QrCodeReader from '../components/QrCodeReader';
-import { userPlays, userWins, userLoses } from '../redux/actions';
+import { userPlays, userWins, userLoses, playAgain } from '../redux/actions';
 
 class PlayScreen extends React.Component {
   static navigationOptions = {
@@ -12,8 +13,21 @@ class PlayScreen extends React.Component {
   handleBarCodeRead({ type, data }) {
     // trigger the userPlays action
     this.props.userPlays(data);
+    
+    // @TODO: Need a method for 'rolling the dice'.
+    // And a way to invalidate codes that have been used already.
+
     // wait 3 seconds and trigger the userWins action
     setTimeout(() => {this.props.userWins(data)}, 3000);
+  }
+
+  onPlayAgainPress() {
+    this.props.playAgain();
+  }
+
+  onRedeemPress() {
+    this.props.playAgain();
+    this.props.navigation.navigate('Redeem');
   }
 
   renderQrCodeReader() {
@@ -30,7 +44,13 @@ class PlayScreen extends React.Component {
   }
 
   renderWinner() {
-    return <View><Text>Winner! You won {this.props.amount} Trees.</Text></View>;
+    return (
+      <View>
+        <Text>Winner! You won {this.props.amount} Trees.</Text>
+        <Button title="Play Again!" onPress={this.onPlayAgainPress.bind(this)} />
+        <Button title="Redeem" onPress={this.onRedeemPress.bind(this)} />
+      </View>
+    );
   }
 
   renderLoser() {
@@ -69,5 +89,6 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   userLoses,
   userWins,
-  userPlays
+  userPlays,
+  playAgain
 })(PlayScreen);
