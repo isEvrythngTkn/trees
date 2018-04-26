@@ -46,7 +46,7 @@ const loginUserFail = (dispatch) => {
 const userCreateSuccess = async (dispatch, user) => {
   console.log('User Create Success');
   // create a new user in OST
-  //const ostUser = await createUser(user.uid);
+  const ostUser = await createUser(user.uid);
   dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
 };
 
