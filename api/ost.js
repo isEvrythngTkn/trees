@@ -18,13 +18,12 @@ export const createUser = async (uid) => {
 
   // Send data even tho the API docs don't mention it
   // https://help.ost.com/support/discussions/topics/35000004792
-  axios.post(url, requestData)
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  try{
+    const response = await axios.post(url, requestData);
+    return response.data.data.economy_users[0].uuid;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 generateRequestUrlAndData = (endpoint, inputParams) => {

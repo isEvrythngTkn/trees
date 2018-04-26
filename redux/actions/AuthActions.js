@@ -7,7 +7,11 @@ import {
   LOGOUT_USER
 } from './types';
 import { createUser } from '../../api/ost';
-import { register, login } from '../../api/firebase';
+import { 
+  register, 
+  login,
+  createUserRecordWithUUID
+} from '../../api/firebase';
 
 export const emailChanged = (text) => {
   return {
@@ -46,8 +50,14 @@ const loginUserFail = (dispatch) => {
 const userCreateSuccess = async (dispatch, user) => {
   console.log('User Create Success');
   // create a new user in OST
-  const ostUser = await createUser(user.uid);
-  dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
+  try {
+    const ostUUID = await createUser(user.uid);
+    await createUserRecordWithUUID(ostUUID);
+    dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
+  } catch (err) {
+    // @TODO: need better error handling here
+    console.log('this failed miserably', err);
+  }
 };
 
 const loginUserSuccess = (dispatch, user) => {
