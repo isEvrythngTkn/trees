@@ -6,6 +6,7 @@ import {
   LOGIN_USER,
   LOGOUT_USER
 } from './types';
+import { createUser } from '../../api/ost';
 import { register, login } from '../../api/firebase';
 
 export const emailChanged = (text) => {
@@ -31,7 +32,7 @@ export const loginUser = ({ email, password }) => {
       .then(user => loginUserSuccess(dispatch, user))
       .catch(() => {
         register({ email, password })
-          .then(user => loginUserSuccess(dispatch, user))
+          .then(user => userCreateSuccess(dispatch, user))
           .catch(() => loginUserFail(dispatch));
       });
   };
@@ -40,6 +41,13 @@ export const loginUser = ({ email, password }) => {
 const loginUserFail = (dispatch) => {
   console.log('loginUserFail');
   dispatch({ type: LOGIN_USER_FAIL });
+};
+
+const userCreateSuccess = async (dispatch, user) => {
+  console.log('User Create Success');
+  // create a new user in OST
+  //const ostUser = await createUser(user.uid);
+  dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
 };
 
 const loginUserSuccess = (dispatch, user) => {
