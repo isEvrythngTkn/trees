@@ -4,13 +4,15 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
   LOGIN_USER,
-  LOGOUT_USER
+  LOGOUT_USER,
+  CREATE_USER_SUCCESS
 } from './types';
 import { createUser } from '../../api/ost';
 import { 
   register, 
   login,
-  createUserRecordWithUUID
+  createUserRecordWithUUID,
+  getUserUUID
 } from '../../api/firebase';
 
 export const emailChanged = (text) => {
@@ -50,19 +52,29 @@ const loginUserFail = (dispatch) => {
 const userCreateSuccess = async (dispatch, user) => {
   console.log('User Create Success');
   // create a new user in OST
+  // and store their OST UUID in Firebase
   try {
     const ostUUID = await createUser(user.uid);
     await createUserRecordWithUUID(ostUUID);
-    dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
+    dispatch({ type: CREATE_USER_SUCCESS, payload: { user, ostUUID } });
   } catch (err) {
     // @TODO: need better error handling here
     console.log('this failed miserably', err);
   }
 };
 
-const loginUserSuccess = (dispatch, user) => {
-  console.log('loginUserSuccess')
-  dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
+const loginUserSuccess = async (dispatch, user) => {
+  console.log('loginUserSuccess');
+
+  // probably need to get the OST UUID right here
+  try {
+    await getUserUUID(ostUUID => {
+      console.log('ostUUID', ostUUID);
+      dispatch({ type: LOGIN_USER_SUCCESS, payload: { user, ostUUID } });
+    });
+  } catch(err) {
+    console.log('failed to get the UUID', err);
+  }
 };
 
 export const logoutUser = () => {
@@ -71,4 +83,3 @@ export const logoutUser = () => {
     payload: null
   };
 };
-

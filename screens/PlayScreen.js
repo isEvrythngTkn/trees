@@ -18,7 +18,7 @@ class PlayScreen extends React.Component {
     // And a way to invalidate codes that have been used already.
 
     // wait 3 seconds and trigger the userWins action
-    setTimeout(() => {this.props.userWins(data)}, 3000);
+    //setTimeout(() => {this.props.userWins(data)}, 3000);
   }
 
   onPlayAgainPress() {

@@ -6,6 +6,12 @@ import { Ionicons } from '@expo/vector-icons';
 import RootNavigation from './navigation/RootNavigation';
 import store from './redux/store';
 
+// Hack to get rid of annoying yellow box that 
+// I can't do anything about because it's a Firebase thing.
+console.ignoredYellowBox = [
+    'Setting a timer'
+]
+
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,

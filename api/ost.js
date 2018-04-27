@@ -35,7 +35,7 @@ generateRequestUrlAndData = (endpoint, inputParams) => {
     ...inputParams,
     api_key: API_KEY,
     request_timestamp: requestTimestamp,
-    signature
+    signature: signature
   };
   return { url, requestData };
 }
