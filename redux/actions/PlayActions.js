@@ -1,3 +1,4 @@
+import { transferToUser } from '../../api/ost';
 import { 
   USER_PLAYING,
   USER_LOSE,
@@ -5,25 +6,28 @@ import {
   PLAY_AGAIN
 } from './types';
 
-export const userPlays = (text) => {
-  return {
-    type: USER_PLAYING,
-    payload: null
+export const userPlays = ({ uuid, kind }) => {
+  console.log('User Plays!', uuid, kind);
+  // transfer the right number of tokens to the user
+  return (dispatch) => {
+    try {
+      dispatch({ type: USER_PLAYING });
+      transferToUser(kind, uuid);
+      userWins(dispatch);
+    } catch (err) {
+      // @TODO: need better error handling here
+      console.log('Failed to transfer funds', err);
+      userLoses(dispatch);
+    }
   };
 };
 
-export const userWins = (text) => {
-  return {
-    type: USER_WIN,
-    payload: text
-  };
+const userWins = (dispatch) => {
+  dispatch({ type: USER_WIN });
 }
 
-export const userLoses = (text) => {
-  return {
-    type: USER_LOSE,
-    payload: 0
-  };
+const userLoses = (dispatch) => {
+  dispatch({ type: USER_LOSE });
 }
 
 export const playAgain = () => {

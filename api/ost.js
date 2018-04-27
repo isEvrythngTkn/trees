@@ -1,9 +1,12 @@
 import queryString from 'query-string';
 import CryptoJS from 'crypto-js';
 import axios from 'axios';
-import { API_KEY, SECRET } from '../config/ost';
-
-ROOT_API_URL = 'https://playgroundapi.ost.com';
+import { 
+  API_KEY, 
+  SECRET, 
+  COMPANY_UUID, 
+  ROOT_API_URL 
+} from '../config/ost';
 
 export const createUser = async (uid) => {
   // @TODO: using the subString of the uid from Firebase 
@@ -25,6 +28,24 @@ export const createUser = async (uid) => {
     console.log(err);
   }
 };
+
+export const transferToUser = async (kind, uuid) => {
+  const endpoint = '/transaction-types/execute';
+  inputParams = {
+    from_uuid: COMPANY_UUID,
+    to_uuid: uuid,
+    transaction_kind: kind
+  };
+  
+  const { url, requestData } = generateRequestUrlAndData(endpoint, inputParams);
+
+  try{
+    console.log('About to post a transaction execution', url, requestData);
+    return await axios.post(url, requestData);
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 generateRequestUrlAndData = (endpoint, inputParams) => {
   const requestTimestamp = Date.now();

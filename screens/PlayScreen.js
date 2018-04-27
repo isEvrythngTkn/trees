@@ -11,14 +11,7 @@ class PlayScreen extends React.Component {
   };
 
   handleBarCodeRead({ type, data }) {
-    // trigger the userPlays action
-    this.props.userPlays(data);
-    
-    // @TODO: Need a method for 'rolling the dice'.
-    // And a way to invalidate codes that have been used already.
-
-    // wait 3 seconds and trigger the userWins action
-    //setTimeout(() => {this.props.userWins(data)}, 3000);
+    this.props.userPlays({ uuid: this.props.ostUUID, kind: data });
   }
 
   onPlayAgainPress() {
@@ -80,9 +73,12 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   const { amount, playing } = state.play;
+  const { ostUUID } = state.auth;
+  console.log('ostUUID', ostUUID );
   return {
     amount,
-    playing
+    playing,
+    ostUUID
   };
 }
 
