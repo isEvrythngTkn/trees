@@ -16,8 +16,10 @@ export const createUserRecordWithUUID = (uuid) => {
     return database.ref(`users/${auth.currentUser.uid}`).set({ uuid });
 }
 
-export const getUserUUID = (callback) => {
-    return database.ref(`/users/${auth.currentUser.uid}`)
+export const getUserUUID = (userToken, callback) => {
+  console.log('userToken', userToken);
+    userToken = userToken || auth.currentUser.uid;
+    return database.ref(`/users/${userToken}`)
         .on('value', snapshot => {
             callback(snapshot.val().uuid);
         });

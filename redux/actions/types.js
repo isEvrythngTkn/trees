@@ -7,6 +7,10 @@ export const LOGOUT_USER = 'logout_user';
 
 export const CREATE_USER_SUCCESS = 'create_user_success';
 
+export const FETCHED_OST_UUID = 'fetched_ost_uuid';
+export const FETCH_BALANCE = 'fetch_balance';
+export const FETCHED_BALANCE = 'fetched_balance';
+
 export const USER_PLAYING = 'user_playing';
 export const USER_LOSE = 'user_lose';
 export const USER_WIN = 'user_win';

@@ -12,8 +12,9 @@ export const userPlays = ({ uuid, kind }) => {
   return (dispatch) => {
     try {
       dispatch({ type: USER_PLAYING });
-      transferToUser(kind, uuid);
-      userWins(dispatch);
+      const response = transferToUser(kind, uuid);
+      console.log('response from transfer to user', response);
+      userWins(dispatch, kind);
     } catch (err) {
       // @TODO: need better error handling here
       console.log('Failed to transfer funds', err);
@@ -22,8 +23,10 @@ export const userPlays = ({ uuid, kind }) => {
   };
 };
 
-const userWins = (dispatch) => {
-  dispatch({ type: USER_WIN });
+const userWins = (dispatch, kind) => {
+  // payload is hardcoded for the moment
+  // @TODO change payload to be variable
+  dispatch({ type: USER_WIN, payload: 50 });
 }
 
 const userLoses = (dispatch) => {

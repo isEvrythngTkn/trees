@@ -45,7 +45,21 @@ export const transferToUser = async (kind, uuid) => {
   } catch (err) {
     console.log(err);
   }
-}
+};
+
+export const getUserBalance = async (fireBaseUid, OstUuid) => {
+  const endpoint = '/users/edit';
+  const name = fireBaseUid.substring(0, 20);
+  console.log('name and ostuuid', name, OstUuid);
+  const { url, requestData } = generateRequestUrlAndData(endpoint, { uuid: OstUuid, name });
+
+  try{
+    const response = await axios.post(url, requestData);
+    return response.data.data.economy_users[0].token_balance;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 generateRequestUrlAndData = (endpoint, inputParams) => {
   const requestTimestamp = Date.now();

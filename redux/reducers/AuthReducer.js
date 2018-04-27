@@ -6,7 +6,8 @@ import {
   LOGIN_USER_FAIL,
   LOGIN_USER,
   LOGOUT_USER,
-  CREATE_USER_SUCCESS
+  CREATE_USER_SUCCESS,
+  FETCHED_OST_UUID
 } from '../actions/types';
 
 const INITIAL_STATE = { 
@@ -19,6 +20,7 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
+  //console.log('action', action);
   // console.log(action);
   const payload = action.payload;
 
@@ -41,7 +43,10 @@ export default (state = INITIAL_STATE, action) => {
     case LOGOUT_USER:
       console.log('LOGOUT USER');
       _signOutAsync();
-      return INITIAL_STATE;
+      return { ...INITIAL_STATE };
+    case FETCHED_OST_UUID:
+      console.log('FETCHED_OST_UUID', payload);
+      return { ...state, ostUUID: payload };
     default:
       return state;
   }

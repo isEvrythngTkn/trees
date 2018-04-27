@@ -5,9 +5,11 @@ import {
   LOGIN_USER_FAIL,
   LOGIN_USER,
   LOGOUT_USER,
-  CREATE_USER_SUCCESS
+  CREATE_USER_SUCCESS,
+  FETCHED_OST_UUID,
+  FETCHED_BALANCE
 } from './types';
-import { createUser } from '../../api/ost';
+import { createUser, getUserBalance } from '../../api/ost';
 import { 
   register, 
   login,
@@ -68,8 +70,11 @@ const loginUserSuccess = async (dispatch, user) => {
 
   // probably need to get the OST UUID right here
   try {
-    await getUserUUID(ostUUID => {
+    await getUserUUID(null, async (ostUUID) => {
       console.log('ostUUID', ostUUID);
+      const balance = await getUserBalance(user.uid, ostUUID);
+      console.log('balance balance balance', balance);
+      dispatch({ type: FETCHED_BALANCE, payload: balance });
       dispatch({ type: LOGIN_USER_SUCCESS, payload: { user, ostUUID } });
     });
   } catch(err) {
@@ -81,5 +86,13 @@ export const logoutUser = () => {
   return {
     type: LOGOUT_USER,
     payload: null
+  };
+};
+
+export const ostUUIDFetched = (text) => {
+  console.log('ostUUIDFetched', text);
+  return {
+    type: FETCHED_OST_UUID,
+    payload: text
   };
 };
