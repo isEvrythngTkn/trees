@@ -25,18 +25,7 @@ class RedeemScreen extends React.Component {
   }
 
   renderRow(item) {
-    // return <Text>{item.description}</Text>;
     return <Item item={item} />;
-    // const { id, title, description } = item;
-
-    // return (
-    //     <TouchableWithoutFeedback>
-    //         <View>
-    //             <Text>{title}</Text>
-    //             <Text style={{ flex: 1 }}>{description}</Text>
-    //         </View>
-    //     </TouchableWithoutFeedback>
-    // );
   }
 
   render() {
