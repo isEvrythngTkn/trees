@@ -1,10 +1,21 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ListView,
+    TouchableWithoutFeedback, 
+    LayoutAnimation } from 'react-native';
 import { connect } from 'react-redux';
 import { getNavigationOptions } from '../navigation/NavigationOptions';
+import Item from '../components/Item';
 
 class RedeemScreen extends React.Component {
   static navigationOptions = getNavigationOptions;
+
+  componentWillMount() {
+    const ds = new ListView.DataSource({
+        rowHasChanged: (r1, r2) => r1 !== r2
+    });
+    console.log(this.props.redeemables);
+    this.dataSource = ds.cloneWithRows(this.props.redeemables);
+  }
 
   componentDidMount() {
     this.props.navigation.setParams({
@@ -13,22 +24,37 @@ class RedeemScreen extends React.Component {
     });
   }
 
+  renderRow(item) {
+    // return <Text>{item.description}</Text>;
+    return <Item item={item} />;
+    // const { id, title, description } = item;
+
+    // return (
+    //     <TouchableWithoutFeedback>
+    //         <View>
+    //             <Text>{title}</Text>
+    //             <Text style={{ flex: 1 }}>{description}</Text>
+    //         </View>
+    //     </TouchableWithoutFeedback>
+    // );
+  }
 
   render() {
     return (
-        <View>
-            <Text>
-                Will need a ListView here.
-            </Text>
-        </View>
+        <ListView
+          dataSource={this.dataSource}
+          renderRow={this.renderRow}
+        />
     );
   }
 }
 
 const mapStateToProps = state => {
   const { balance } = state.ost;
+  const { redeemables } = state;
   return {
-    balance
+    balance,
+    redeemables
   };
 };
 
