@@ -1,10 +1,18 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
+import { getNavigationOptions } from '../navigation/NavigationOptions';
 
-export default class RedeemScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Redeem',
-  };
+class RedeemScreen extends React.Component {
+  static navigationOptions = getNavigationOptions;
+
+  componentDidMount() {
+    this.props.navigation.setParams({
+     balance: this.props.balance,
+     title: 'Redeem'
+    });
+  }
+
 
   render() {
     return (
@@ -16,3 +24,12 @@ export default class RedeemScreen extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  const { balance } = state.ost;
+  return {
+    balance
+  };
+};
+
+export default connect(mapStateToProps, {})(RedeemScreen);

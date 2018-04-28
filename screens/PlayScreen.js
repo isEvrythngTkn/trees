@@ -4,11 +4,17 @@ import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 import QrCodeReader from '../components/QrCodeReader';
 import { userPlays, userWins, userLoses, playAgain } from '../redux/actions';
+import { getNavigationOptions } from '../navigation/NavigationOptions';
 
 class PlayScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Play',
-  };
+  static navigationOptions = getNavigationOptions;
+
+  componentDidMount() {
+    this.props.navigation.setParams({
+     balance: this.props.balance,
+     title: 'Play'
+    });
+  }
 
   handleBarCodeRead({ type, data }) {
     this.props.userPlays({ uuid: this.props.ostUUID, kind: data });
@@ -74,11 +80,13 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   const { amount, playing } = state.play;
   const { ostUUID } = state.auth;
+  const { balance } = state.ost;
   console.log('ostUUID', ostUUID );
   return {
     amount,
     playing,
-    ostUUID
+    ostUUID,
+    balance
   };
 }
 

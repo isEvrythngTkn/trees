@@ -13,11 +13,24 @@ import { connect } from 'react-redux';
 import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
 import { logoutUser } from '../redux/actions';
+import { getNavigationOptions } from '../navigation/NavigationOptions';
+//import NewHeader from '../components/NewHeader';
 
 class HomeScreen extends React.Component {
-  static navigationOptions = {
-    header: null,
-  };
+  static navigationOptions = getNavigationOptions;
+
+  componentDidMount() {
+    this.props.navigation.setParams({
+     balance: this.props.balance,
+     title: 'Hella cool'
+    });
+  }
+
+  header() {
+    return (
+      <Text>Enormous</Text>
+    );
+  }
 
   onSignoutButtonPress() {
     this.props.logoutUser();
@@ -31,6 +44,7 @@ class HomeScreen extends React.Component {
         <ScrollView style={container} contentContainerStyle={contentContainer}>
           <View style={welcomeContainer}>
             <Text style={treesTitle}>TREES</Text>
+            <Text>Your Balance: {this.props.balance} Trees</Text>
             <Image
               source={require('../assets/images/logo-icon.png')}
               style={welcomeImage}
@@ -78,8 +92,10 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   console.log('state', state);
   const { user } = state.auth;
+  const { balance } = state.ost;
   return {
-    user
+    user,
+    balance
   };
 };
 
