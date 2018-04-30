@@ -6,14 +6,16 @@ import MainTabNavigator from './MainTabNavigator';
 import SignInScreen from '../screens/SignInScreen';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen'
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
-
-
+import OrderDetailsScreen from '../screens/OrderDetailsScreen';
 
 const AppStackNavigator = StackNavigator(
   {
     Main: {
       screen: MainTabNavigator,
     },
+    OrderDetails: {
+      screen: OrderDetailsScreen
+    }
   },
   {
     navigationOptions: () => ({

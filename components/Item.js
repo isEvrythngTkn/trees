@@ -26,7 +26,8 @@ class Item extends Component {
       kind: this.props.item.transaction_kind
     });
     this.setState({ showModal: false });
-    console.log('record this transaction in Firebase');
+    this.props.navigation.navigate('OrderDetails');
+    // @TODO: record this transaction in Firebase
   }
 
   onDecline() {

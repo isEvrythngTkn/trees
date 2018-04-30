@@ -25,14 +25,14 @@ class RedeemScreen extends React.Component {
   }
 
   renderRow(item) {
-    return <Item item={item} />;
+    return <Item item={item} navigation={this.props.navigation} />;
   }
 
   render() {
     return (
         <ListView
           dataSource={this.dataSource}
-          renderRow={this.renderRow}
+          renderRow={this.renderRow.bind(this)}
         />
     );
   }
