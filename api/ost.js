@@ -29,11 +29,19 @@ export const createUser = async (uid) => {
   }
 };
 
-export const transferToUser = async (kind, uuid) => {
+export const transferToUser = async (kind, userUUID) => {
+  return await _transfer(kind, COMPANY_UUID, userUUID);
+};
+
+export const transferToCompany = async(kind, userUUID) => {
+  return await _transfer(kind, userUUID, COMPANY_UUID);
+}
+
+const _transfer = async (kind, fromUUID, toUUID) => {
   const endpoint = '/transaction-types/execute';
   inputParams = {
-    from_uuid: COMPANY_UUID,
-    to_uuid: uuid,
+    from_uuid: fromUUID,
+    to_uuid: toUUID,
     transaction_kind: kind
   };
   
@@ -45,7 +53,7 @@ export const transferToUser = async (kind, uuid) => {
   } catch (err) {
     console.log(err);
   }
-};
+}
 
 export const getUserBalance = async (fireBaseUid, OstUuid) => {
   const endpoint = '/users/edit';
@@ -55,6 +63,7 @@ export const getUserBalance = async (fireBaseUid, OstUuid) => {
 
   try{
     const response = await axios.post(url, requestData);
+    console.log('response from getUserBalance request', response);
     return response.data.data.economy_users[0].token_balance;
   } catch (err) {
     console.log(err);

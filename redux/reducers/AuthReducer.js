@@ -7,7 +7,8 @@ import {
   LOGIN_USER,
   LOGOUT_USER,
   CREATE_USER_SUCCESS,
-  FETCHED_OST_UUID
+  FETCHED_OST_UUID,
+  FETCHED_USER_TOKEN
 } from '../actions/types';
 
 const INITIAL_STATE = { 
@@ -16,7 +17,8 @@ const INITIAL_STATE = {
   loading: false,
   error: '',
   user: null,
-  ostUUID: null
+  ostUUID: null,
+  userToken: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -47,6 +49,9 @@ export default (state = INITIAL_STATE, action) => {
     case FETCHED_OST_UUID:
       console.log('FETCHED_OST_UUID', payload);
       return { ...state, ostUUID: payload };
+    case FETCHED_USER_TOKEN:
+      console.log('FETCHED_USER_TOKEN', payload);
+      return { ...state, userToken: payload };
     default:
       return state;
   }

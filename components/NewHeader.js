@@ -4,6 +4,7 @@ import {
   Text,
   View,
 } from 'react-native'
+import { connect } from 'react-redux';
 
 class NewHeader extends React.Component {
   render() {
@@ -16,4 +17,11 @@ class NewHeader extends React.Component {
   }
 }
 
-export default NewHeader;
+const mapStateToProps = state => {
+  const { balance } = state.ost;
+  return {
+    balance
+  };
+}
+
+export default connect(mapStateToProps, {})(NewHeader);

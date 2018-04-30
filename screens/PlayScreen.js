@@ -17,7 +17,11 @@ class PlayScreen extends React.Component {
   }
 
   handleBarCodeRead({ type, data }) {
-    this.props.userPlays({ uuid: this.props.ostUUID, kind: data });
+    this.props.userPlays({ 
+      userToken: this.props.userToken,
+      uuid: this.props.ostUUID, 
+      kind: data, 
+    });
   }
 
   onPlayAgainPress() {
@@ -79,13 +83,14 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   const { amount, playing } = state.play;
-  const { ostUUID } = state.auth;
+  const { ostUUID, userToken } = state.auth;
   const { balance } = state.ost;
   console.log('ostUUID', ostUUID );
   return {
     amount,
     playing,
     ostUUID,
+    userToken,
     balance
   };
 }

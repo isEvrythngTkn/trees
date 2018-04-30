@@ -5,16 +5,18 @@ import {
   USER_WIN,
   PLAY_AGAIN
 } from './types';
+import { fetchBalance } from './OstActions';
+import store from '../store';
 
-export const userPlays = ({ uuid, kind }) => {
+export const userPlays = ({ userToken, uuid, kind }) => {
   console.log('User Plays!', uuid, kind);
   // transfer the right number of tokens to the user
-  return (dispatch) => {
+  return async (dispatch) => {
     try {
       dispatch({ type: USER_PLAYING });
-      const response = transferToUser(kind, uuid);
+      const response = await transferToUser(kind, uuid);
       console.log('response from transfer to user', response);
-      userWins(dispatch, kind);
+      userWins(dispatch, kind, uuid, userToken);
     } catch (err) {
       // @TODO: need better error handling here
       console.log('Failed to transfer funds', err);
@@ -23,10 +25,14 @@ export const userPlays = ({ uuid, kind }) => {
   };
 };
 
-const userWins = (dispatch, kind) => {
+const userWins = (dispatch, kind, ostUUID, userToken) => {
   // payload is hardcoded for the moment
   // @TODO change payload to be variable
-  dispatch({ type: USER_WIN, payload: 50 });
+  
+  // doesn't seem like the balance is updated in time for me to get it.
+  // store.dispatch(fetchBalance({ userToken, ostUUID }));
+  
+  dispatch({ type: USER_WIN, payload: kind });
 }
 
 const userLoses = (dispatch) => {

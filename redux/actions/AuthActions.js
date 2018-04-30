@@ -7,7 +7,8 @@ import {
   LOGOUT_USER,
   CREATE_USER_SUCCESS,
   FETCHED_OST_UUID,
-  FETCHED_BALANCE
+  FETCHED_BALANCE,
+  FETCHED_USER_TOKEN
 } from './types';
 import { createUser, getUserBalance } from '../../api/ost';
 import { 
@@ -96,3 +97,11 @@ export const ostUUIDFetched = (text) => {
     payload: text
   };
 };
+
+export const userTokenFetched = text => {
+  console.log('userTokenFetched', text);
+  return {
+    type: FETCHED_USER_TOKEN,
+    payload: text
+  };
+}

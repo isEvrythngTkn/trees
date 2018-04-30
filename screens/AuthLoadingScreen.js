@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { getUserUUID } from '../api/firebase';
-import { ostUUIDFetched } from '../redux/actions/AuthActions.js';
+import { ostUUIDFetched, userTokenFetched } from '../redux/actions/AuthActions.js';
 import { fetchBalance } from '../redux/actions/OstActions';
 
 class AuthLoadingScreen extends React.Component {
@@ -22,6 +22,7 @@ class AuthLoadingScreen extends React.Component {
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
     const userToken = await AsyncStorage.getItem('userToken');
+    this.props.userTokenFetched(userToken);
 
     // get the OST UUID for the current user, in case we lost our state
     if (userToken && !this.props.ostUUID) {
@@ -68,5 +69,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { ostUUIDFetched, fetchBalance })(AuthLoadingScreen);
+export default connect(mapStateToProps, { 
+  ostUUIDFetched, 
+  userTokenFetched,
+  fetchBalance 
+})(AuthLoadingScreen);
 

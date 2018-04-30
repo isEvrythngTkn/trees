@@ -4,6 +4,7 @@ import {
   USER_WIN,
   PLAY_AGAIN
 } from '../actions/types';
+import { transactionKinds } from '../../constants/TransactionKinds';
 
 const INITIAL_STATE = { 
   amount: null,
@@ -17,7 +18,8 @@ export default (state = INITIAL_STATE, action) => {
     case USER_LOSE:
       return { ...state, amount: action.payload, playing: false};
     case USER_WIN:
-      return { ...state, amount: action.payload, playing: false };
+      const amount = transactionKinds[action.payload].amount;
+      return { ...state, amount, playing: false };
     case PLAY_AGAIN:
       return { ...INITIAL_STATE};
     default:
