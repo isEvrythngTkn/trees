@@ -22,8 +22,6 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-  //console.log('action', action);
-  // console.log(action);
   const payload = action.payload;
 
   switch (action.type) {
@@ -38,7 +36,6 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, ...INITIAL_STATE, user: payload.user, ostUUID: payload.ostUUID };
     case CREATE_USER_SUCCESS:
       _signInAsync(payload.user.uid);
-      console.log('user and ostUUID', payload.user, payload.ostUUID);
       return { ...state, ...INITIAL_STATE, user: payload.user, ostUUID: payload.ostUUID };
     case LOGIN_USER_FAIL:
       return { ...state, error: 'Authentication Failed.', loading: false };
@@ -47,10 +44,8 @@ export default (state = INITIAL_STATE, action) => {
       _signOutAsync();
       return { ...INITIAL_STATE };
     case FETCHED_OST_UUID:
-      console.log('FETCHED_OST_UUID', payload);
       return { ...state, ostUUID: payload };
     case FETCHED_USER_TOKEN:
-      console.log('FETCHED_USER_TOKEN', payload);
       return { ...state, userToken: payload };
     default:
       return state;

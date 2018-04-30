@@ -72,9 +72,7 @@ const loginUserSuccess = async (dispatch, user) => {
   // probably need to get the OST UUID right here
   try {
     await getUserUUID(null, async (ostUUID) => {
-      console.log('ostUUID', ostUUID);
       const balance = await getUserBalance(user.uid, ostUUID);
-      console.log('balance balance balance', balance);
       dispatch({ type: FETCHED_BALANCE, payload: balance });
       dispatch({ type: LOGIN_USER_SUCCESS, payload: { user, ostUUID } });
     });
@@ -91,7 +89,6 @@ export const logoutUser = () => {
 };
 
 export const ostUUIDFetched = (text) => {
-  console.log('ostUUIDFetched', text);
   return {
     type: FETCHED_OST_UUID,
     payload: text
@@ -99,7 +96,6 @@ export const ostUUIDFetched = (text) => {
 };
 
 export const userTokenFetched = text => {
-  console.log('userTokenFetched', text);
   return {
     type: FETCHED_USER_TOKEN,
     payload: text
