@@ -20,7 +20,8 @@ export default (state = INITIAL_STATE, action) => {
       newBalance = state.balance + transactionKinds[payload].amount;
       return { ...state, balance: newBalance };
     case REDEEM_SUCCESS:
-      newBalance = state.balance - transactionKinds[payload].amount;
+      const transaction_kind = payload.transaction_kind;
+      newBalance = state.balance - transactionKinds[transaction_kind].amount;
       return { ...state, balance: newBalance };
     default:
       return state;

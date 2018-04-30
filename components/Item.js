@@ -23,10 +23,9 @@ class Item extends Component {
     this.props.userRedeems({ 
       userToken: this.props.userToken,
       uuid: this.props.ostUUID, 
-      kind: this.props.item.transaction_kind
+      item: this.props.item
     });
     this.setState({ showModal: false });
-    this.props.navigation.navigate('OrderDetails');
     // @TODO: record this transaction in Firebase
   }
 

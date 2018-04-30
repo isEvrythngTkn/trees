@@ -13,7 +13,6 @@ class RedeemScreen extends React.Component {
     const ds = new ListView.DataSource({
         rowHasChanged: (r1, r2) => r1 !== r2
     });
-    console.log(this.props.redeemables);
     this.dataSource = ds.cloneWithRows(this.props.redeemables);
   }
 
@@ -22,6 +21,13 @@ class RedeemScreen extends React.Component {
      balance: this.props.balance,
      title: 'Redeem'
     });
+  }
+
+  componentWillReceiveProps(newProps) {
+    console.log('newProps', newProps);
+    if (newProps.order && newProps.order.transaction_uuid) {
+      this.props.navigation.navigate('OrderDetails');
+    }
   }
 
   renderRow(item) {
@@ -41,9 +47,11 @@ class RedeemScreen extends React.Component {
 const mapStateToProps = state => {
   const { balance } = state.ost;
   const { redeemables } = state;
+  const { order } = state.redeem;
   return {
     balance,
-    redeemables
+    redeemables,
+    order
   };
 };
 
