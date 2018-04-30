@@ -30,7 +30,8 @@ const _redeemSuccess = async (dispatch, item, response) => {
   const order = {
     ...item,
     transaction_uuid: response.data.data.transaction_uuid,
-    date: response.headers.date,
+    response_date: response.headers.date,
+    created: Date.now(),
     completed: false
   };
   
