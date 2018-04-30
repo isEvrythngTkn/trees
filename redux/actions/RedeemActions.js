@@ -1,4 +1,5 @@
 import { transferToCompany } from '../../api/ost';
+import { storeOrder } from '../../api/firebase';
 import { 
   REDEEM,
   REDEEM_SUCCESS,
@@ -25,12 +26,21 @@ export const userRedeems = ({ userToken, uuid, item }) => {
   };
 };
 
-const _redeemSuccess = (dispatch, item, response) => {
+const _redeemSuccess = async (dispatch, item, response) => {
   const order = {
     ...item,
-    transaction_uuid: response.data.data.transaction_uuid
+    //response
+    transaction_uuid: response.data.data.transaction_uuid,
+    date: response.headers.date
   };
-  dispatch({ type: REDEEM_SUCCESS, payload: order });
+  console.log('about to store order', order);
+  try {
+    await storeOrder(order);
+    dispatch({ type: REDEEM_SUCCESS, payload: order });
+  } catch (err) {
+    // @TODO: need better error handling here
+    console.log('Failed to store the order on Firebase', err);
+  }
 
   // doesn't seem like the balance is updated in time for me to get it.
   // store.dispatch(fetchBalance({ userToken, ostUUID }));

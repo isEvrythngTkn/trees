@@ -13,14 +13,18 @@ export const login = (data) => {
 }
 
 export const createUserRecordWithUUID = (uuid) => {
-    return database.ref(`users/${auth.currentUser.uid}`).set({ uuid });
+  return database.ref(`users/${auth.currentUser.uid}`).set({ uuid });
 }
 
 export const getUserUUID = (userToken, callback) => {
   console.log('userToken', userToken);
     userToken = userToken || auth.currentUser.uid;
     return database.ref(`/users/${userToken}`)
-        .on('value', snapshot => {
-            callback(snapshot.val().uuid);
-        });
+      .on('value', snapshot => {
+          callback(snapshot.val().uuid);
+      });
+}
+
+export const storeOrder = (order) => {
+  return database.ref(`users/${auth.currentUser.uid}/orders`).push(order);
 }
