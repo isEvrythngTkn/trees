@@ -50,22 +50,35 @@ class PlayScreen extends React.Component {
     return (
       <View>
         <Text>Winner! You won {this.props.amount} Trees.</Text>
+        {this.renderButtons()}
+      </View>
+    );
+  }
+
+  renderLoser() {
+    return (
+      <View>
+        <Text>You Lost!</Text>
+        {this.renderButtons()}
+      </View>
+    );;
+  }
+
+  renderButtons() {
+    return (
+      <View>
         <Button title="Play Again!" onPress={this.onPlayAgainPress.bind(this)} />
         <Button title="Redeem" onPress={this.onRedeemPress.bind(this)} />
       </View>
     );
   }
 
-  renderLoser() {
-    return <View><Text>You Lost!</Text></View>;
-  }
-
   render() {
     if (this.props.playing) {
       return this.renderPlaying();
-    } else if (this.props.amount !== null && this.props.amount > 0) {
+    } else if (this.props.won) {
       return this.renderWinner();
-    } else if (this.props.amount === 0) {
+    } else if (this.props.lost) {
       return this.renderLoser();
     } else {
       return this.renderQrCodeReader(); 
@@ -82,16 +95,18 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-  const { amount, playing } = state.play;
+  const { amount, playing, won, lost } = state.play;
   const { ostUUID, userToken } = state.auth;
   const { balance } = state.ost;
   console.log('ostUUID', ostUUID );
   return {
     amount,
     playing,
+    won,
+    lost,
     ostUUID,
     userToken,
-    balance
+    balance,
   };
 }
 

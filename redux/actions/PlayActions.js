@@ -9,30 +9,27 @@ import { fetchBalance } from './OstActions';
 import store from '../store';
 
 export const userPlays = ({ userToken, uuid, kind }) => {
-  console.log('User Plays!', uuid, kind);
-  // transfer the right number of tokens to the user
-  return async (dispatch) => {
-    try {
-      dispatch({ type: USER_PLAYING });
-      const response = await transferToUser(kind, uuid);
-      console.log('response from transfer to user', response);
-      userWins(dispatch, kind, uuid, userToken);
-    } catch (err) {
-      // @TODO: need better error handling here
-      console.log('Failed to transfer funds', err);
+  return (dispatch) => {
+    dispatch({ type: USER_PLAYING });
+
+    if (Math.random() >= 0.5) {
+      userWins(dispatch, userToken, uuid, kind);
+    } else {
       userLoses(dispatch);
     }
   };
 };
 
-const userWins = (dispatch, kind, ostUUID, userToken) => {
-  // payload is hardcoded for the moment
-  // @TODO change payload to be variable
-  
-  // doesn't seem like the balance is updated in time for me to get it.
-  // store.dispatch(fetchBalance({ userToken, ostUUID }));
-  
-  dispatch({ type: USER_WIN, payload: kind });
+const userWins = async (dispatch, userToken, uuid, kind) => {
+  try {
+    const response = await transferToUser(kind, uuid);
+    console.log('response from transfer to user', response);
+    dispatch({ type: USER_WIN, payload: kind });
+  } catch (err) {
+    console.log('Failed to transfer funds', err);
+    // @TODO: need better error handling here
+    // userLoses(dispatch);
+  }
 }
 
 const userLoses = (dispatch) => {
