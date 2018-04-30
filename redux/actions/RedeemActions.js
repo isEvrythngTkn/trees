@@ -29,11 +29,11 @@ export const userRedeems = ({ userToken, uuid, item }) => {
 const _redeemSuccess = async (dispatch, item, response) => {
   const order = {
     ...item,
-    //response
     transaction_uuid: response.data.data.transaction_uuid,
-    date: response.headers.date
+    date: response.headers.date,
+    completed: false
   };
-  console.log('about to store order', order);
+  
   try {
     await storeOrder(order);
     dispatch({ type: REDEEM_SUCCESS, payload: order });

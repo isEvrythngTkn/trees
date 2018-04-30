@@ -38,7 +38,6 @@ class OrderDetailsScreen extends React.Component {
 const mapStateToProps = state => {
   const { balance } = state.ost;
   const { order } = state.redeem;
-  console.log('order', order);
   return { balance, order };
 };
 
