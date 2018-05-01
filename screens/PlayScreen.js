@@ -5,6 +5,7 @@ import { Button } from 'react-native-elements';
 import QrCodeReader from '../components/QrCodeReader';
 import { userPlays, userWins, userLoses, playAgain } from '../redux/actions';
 import { getNavigationOptions } from '../navigation/NavigationOptions';
+import { ContainerStyle } from '../components/styles';
 
 class PlayScreen extends React.Component {
   static navigationOptions = getNavigationOptions;
@@ -74,15 +75,23 @@ class PlayScreen extends React.Component {
   }
 
   render() {
+    let content;
+
     if (this.props.playing) {
-      return this.renderPlaying();
+      content = this.renderPlaying();
     } else if (this.props.won) {
-      return this.renderWinner();
+      content = this.renderWinner();
     } else if (this.props.lost) {
-      return this.renderLoser();
+      content = this.renderLoser();
     } else {
-      return this.renderQrCodeReader(); 
+      content = this.renderQrCodeReader(); 
     }
+
+    return (
+      <View style={ContainerStyle.styles}>
+        {content}
+      </View>
+    );
   }
 }
 

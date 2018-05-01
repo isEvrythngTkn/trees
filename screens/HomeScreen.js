@@ -14,7 +14,8 @@ import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
 import { logoutUser } from '../redux/actions';
 import { getNavigationOptions } from '../navigation/NavigationOptions';
-//import NewHeader from '../components/NewHeader';
+import { ContainerStyle } from '../components/styles';
+
 
 class HomeScreen extends React.Component {
   static navigationOptions = getNavigationOptions;
@@ -22,7 +23,7 @@ class HomeScreen extends React.Component {
   componentDidMount() {
     this.props.navigation.setParams({
      balance: this.props.balance,
-     title: 'Hella cool'
+     title: 'Home'
     });
   }
 
@@ -40,18 +41,16 @@ class HomeScreen extends React.Component {
   render() {
     const { container, welcomeContainer, treesTitle, welcomeImage, contentContainer } = styles;
     return (
-      <View style={container}>
-        <ScrollView style={container} contentContainerStyle={contentContainer}>
-          <View style={welcomeContainer}>
-            <Text style={treesTitle}>TREES</Text>
-            <Text>Your Balance: {this.props.balance} Trees</Text>
-            <Image
-              source={require('../assets/images/logo-icon.png')}
-              style={welcomeImage}
-            />
-            <Button title="Logout" onPress={this.onSignoutButtonPress.bind(this)} />
-          </View>
-        </ScrollView>
+      <View style={ContainerStyle.styles}>
+        <View style={welcomeContainer}>
+          <Text style={treesTitle}>TREES</Text>
+          <Text>Your Balance: {this.props.balance} Trees</Text>
+          <Image
+            source={require('../assets/images/logo-icon.png')}
+            style={welcomeImage}
+          />
+          <Button title="Logout" onPress={this.onSignoutButtonPress.bind(this)} />
+        </View>
       </View>
     );
   }
