@@ -12,6 +12,9 @@ const AppStackNavigator = StackNavigator(
   {
     Main: {
       screen: MainTabNavigator,
+    },
+    OrderDetails: {
+      screen: OrderDetailsScreen,
     }
   },
   {

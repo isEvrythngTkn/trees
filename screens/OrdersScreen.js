@@ -3,6 +3,7 @@ import { View, Text, Image, ListView } from 'react-native';
 import { connect } from 'react-redux';
 import { getNavigationOptions } from '../navigation/NavigationOptions';
 import { ordersFetch } from '../redux/actions';
+import OrderListItem from '../components/OrderListItem';
 
 class OrdersScreen extends React.Component {
   static navigationOptions = getNavigationOptions;
@@ -33,9 +34,7 @@ class OrdersScreen extends React.Component {
   }
 
   renderRow(order) {
-    return (
-      <Text>{order.title}</Text>
-    );
+    return <OrderListItem order={order} navigation={this.props.navigation} />
   }
 
   render() {
@@ -43,7 +42,7 @@ class OrdersScreen extends React.Component {
       <ListView
         enableEmptySections
         dataSource={this.dataSource}
-        renderRow={this.renderRow}
+        renderRow={this.renderRow.bind(this)}
       />
     );
   }

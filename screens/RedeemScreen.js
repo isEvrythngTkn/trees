@@ -25,13 +25,13 @@ class RedeemScreen extends React.Component {
 
   componentWillReceiveProps(newProps) {
     console.log('newProps', newProps);
-    if (newProps.currentOrder && newProps.currentOrder.transaction_uuid) {
-      this.props.navigation.navigate('OrderDetails');
+    if (newProps.order && newProps.order.transaction_uuid) {
+      this.props.navigation.navigate('OrderDetails', newProps.order);
     }
   }
 
   renderRow(item) {
-    return <Item item={item} navigation={this.props.navigation} />;
+    return <Item item={item} />;
   }
 
   render() {

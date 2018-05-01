@@ -7,7 +7,7 @@ import {
 const INITIAL_STATE = {
   redeeming: false,
   item: null,
-  currentOrder: {}
+  order: {}
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -15,7 +15,7 @@ export default (state = INITIAL_STATE, action) => {
     case REDEEM:
       return { ...state, item: action.payload };
     case REDEEM_SUCCESS:
-      return { ...state, currentOrder: action.payload };
+      return { ...state, order: action.payload };
     default:
       return state;
   }

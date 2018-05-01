@@ -6,23 +6,22 @@ import { getNavigationOptions } from '../navigation/NavigationOptions';
 class OrderDetailsScreen extends React.Component {
   static navigationOptions = getNavigationOptions;
 
+  componentWillMount() {
+    const { params } = this.props.navigation.state;
+    console.log(params);
+    //const itemId = params ? params.itemId : null;
+    // const otherParam = params ? params.otherParam : null;
+  }
+
   componentDidMount() {
     this.props.navigation.setParams({
      balance: this.props.balance,
      title: 'Your Order'
     });
   }
-
-  componentWillUnmount() {
-    // should get rid of whatever triggers the navigation to this page. e.g. state.order 
-  }
-
-  renderRow(item) {
-    return <Item item={item} />;
-  }
-
+  
   render() {
-    const { title, description, image_url, price, transaction_uuid } = this.props.order;
+    const { title, description, image_url, price, transaction_uuid } = this.props.navigation.state.params;
     return (
         <View>
           <Text>Your order</Text>

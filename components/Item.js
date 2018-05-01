@@ -19,14 +19,12 @@ class Item extends Component {
   }
 
   onAccept() {
-    // use an action creator to start the transfer
     this.props.userRedeems({ 
       userToken: this.props.userToken,
       uuid: this.props.ostUUID, 
       item: this.props.item
     });
     this.setState({ showModal: false });
-    // @TODO: record this transaction in Firebase
   }
 
   onDecline() {
@@ -59,7 +57,6 @@ class Item extends Component {
 }
 
 const mapStateToProps = state => {
-  //console.log('state: ', state);
   const { ostUUID, userToken } = state.auth;
   return { ostUUID, userToken };
 }
