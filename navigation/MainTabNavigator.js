@@ -8,7 +8,7 @@ import Colors from '../constants/Colors';
 import HomeScreen from '../screens/HomeScreen';
 import PlayScreen from '../screens/PlayScreen';
 import RedeemScreen from '../screens/RedeemScreen';
-import OrderDetailsScreen from '../screens/OrderDetailsScreen';
+import OrdersScreen from '../screens/OrdersScreen';
 
 export default TabNavigator(
   {
@@ -21,6 +21,9 @@ export default TabNavigator(
     Redeem: {
       screen: RedeemScreen,
     },
+    Orders: {
+      screen: OrdersScreen
+    }
   },
   {
     navigationOptions: ({ navigation }) => ({

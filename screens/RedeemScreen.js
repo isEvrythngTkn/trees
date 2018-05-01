@@ -25,7 +25,7 @@ class RedeemScreen extends React.Component {
 
   componentWillReceiveProps(newProps) {
     console.log('newProps', newProps);
-    if (newProps.order && newProps.order.transaction_uuid) {
+    if (newProps.currentOrder && newProps.currentOrder.transaction_uuid) {
       this.props.navigation.navigate('OrderDetails');
     }
   }

@@ -12,15 +12,15 @@ export const userPlays = ({ userToken, uuid, kind }) => {
   return (dispatch) => {
     dispatch({ type: USER_PLAYING });
 
-    if (Math.random() >= 0.5) {
-      userWins(dispatch, userToken, uuid, kind);
-    } else {
-      userLoses(dispatch);
-    }
+    //if (Math.random() >= 0.5) {
+    userWins(dispatch, uuid, kind);
+    //} else {
+      //userLoses(dispatch);
+    //}
   };
 };
 
-const userWins = async (dispatch, userToken, uuid, kind) => {
+const userWins = async (dispatch, uuid, kind) => {
   try {
     const response = await transferToUser(kind, uuid);
     console.log('response from transfer to user', response);

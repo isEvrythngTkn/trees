@@ -13,6 +13,10 @@ class OrderDetailsScreen extends React.Component {
     });
   }
 
+  componentWillUnmount() {
+    // should get rid of whatever triggers the navigation to this page. e.g. state.order 
+  }
+
   renderRow(item) {
     return <Item item={item} />;
   }
@@ -37,8 +41,8 @@ class OrderDetailsScreen extends React.Component {
 
 const mapStateToProps = state => {
   const { balance } = state.ost;
-  const { order } = state.redeem;
-  return { balance, order };
+  const { currentOrder } = state.redeem;
+  return { balance, currentOrder };
 };
 
 export default connect(mapStateToProps, {})(OrderDetailsScreen);

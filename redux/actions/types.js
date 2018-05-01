@@ -20,3 +20,7 @@ export const PLAY_AGAIN = 'play_again';
 export const REDEEM = 'redeem';
 export const REDEEM_SUCCESS = 'redeem_success';
 export const REDEEM_FAIL = 'redeem_fail';
+
+export const FETCH_ORDERS = 'fetch_orders';
+export const FETCH_ORDERS_SUCCESS = 'fetch_orders_success';
+export const FETCH_ORDERS_FAIL = 'fetch_orders_fail';

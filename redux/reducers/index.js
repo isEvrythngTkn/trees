@@ -4,11 +4,13 @@ import PlayReducer from './PlayReducer';
 import OstReducer from './OstReducer';
 import RedeemablesReducer from './RedeemablesReducer';
 import RedeemReducer from './RedeemReducer';
+import OrdersReducer from './OrdersReducer';
 
 export default combineReducers({
     auth: AuthReducer,
     play: PlayReducer,
     ost: OstReducer,
     redeemables: RedeemablesReducer,
-    redeem: RedeemReducer
+    redeem: RedeemReducer,
+    orders: OrdersReducer
 });

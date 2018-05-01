@@ -1,7 +1,8 @@
 import { 
   FETCHED_BALANCE,
   USER_WIN,
-  REDEEM_SUCCESS
+  REDEEM_SUCCESS,
+  LOGOUT
 } from '../actions/types';
 import { transactionKinds } from '../../constants/TransactionKinds';
 
@@ -23,6 +24,8 @@ export default (state = INITIAL_STATE, action) => {
       const transaction_kind = payload.transaction_kind;
       newBalance = state.balance - transactionKinds[transaction_kind].amount;
       return { ...state, balance: newBalance };
+    case LOGOUT:
+      return INITIAL_STATE;
     default:
       return state;
   }

@@ -28,3 +28,10 @@ export const getUserUUID = (userToken, callback) => {
 export const storeOrder = (order) => {
   return database.ref(`users/${auth.currentUser.uid}/orders`).push(order);
 }
+
+export const getOrders = (userToken, callback) => {
+  return database.ref(`users/${auth.currentUser.uid}/orders`)
+    .on('value', snapshot => {
+      callback(snapshot.val());
+    });
+}
