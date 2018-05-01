@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { getNavigationOptions } from '../navigation/NavigationOptions';
 import { ordersFetch } from '../redux/actions';
 import OrderListItem from '../components/OrderListItem';
-import { ContainerStyle } from '../components/styles';
+import { FlatListStyle } from '../components/styles';
 
 class OrdersScreen extends React.Component {
   static navigationOptions = getNavigationOptions;
@@ -36,7 +36,7 @@ class OrdersScreen extends React.Component {
           data={orders}
           renderItem={this.renderRow.bind(this)}
           keyExtractor={(item, index) => index.toString()}
-          contentContainerStyle={ContainerStyle.styles}
+          contentContainerStyle={FlatListStyle.styles}
         />
       );
     }

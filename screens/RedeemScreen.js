@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { getNavigationOptions } from '../navigation/NavigationOptions';
 import Item from '../components/Item';
-import { ContainerStyle } from '../components/styles';
+import { FlatListStyle } from '../components/styles';
 
 class RedeemScreen extends React.Component {
   static navigationOptions = getNavigationOptions;
@@ -25,7 +25,7 @@ class RedeemScreen extends React.Component {
           data={this.props.redeemables}
           renderItem={this.renderRow.bind(this)}
           keyExtractor={(item, index) => index.toString()}
-          contentContainerStyle={ContainerStyle.styles}
+          contentContainerStyle={FlatListStyle.styles}
         />
     );
   }
