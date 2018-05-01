@@ -1,20 +1,21 @@
 import { StyleSheet } from 'react-native';
 
-const containerPadding = {
+const commonContainerStyles = {
   padding: 10,
   paddingTop: 20,
+  backgroundColor: '#fff',
 };
 
 export const ContainerStyle = StyleSheet.create({
   styles: {
-    ...containerPadding,
+    ...commonContainerStyles,
     flex: 1
   }
 });
 
 export const FlatListStyle = StyleSheet.create({
   styles: {
-    ...containerPadding
+    ...commonContainerStyles,
   }
 });
 
