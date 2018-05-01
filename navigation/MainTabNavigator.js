@@ -40,6 +40,9 @@ export default TabNavigator(
           case 'Play':
             iconName = Platform.OS === 'ios' ? `ios-checkmark-circle${focused ? '' : '-outline'}` : 'md-checkmark-circle';
             break;
+          case 'Orders':
+            iconName = Platform.OS === 'ios' ? `ios-list-box${focused ? '' : '-outline'}` : 'md-list-box';
+            break;
           case 'Redeem':
             iconName =
               Platform.OS === 'ios' ? `ios-card${focused ? '' : '-outline'}` : 'md-card';

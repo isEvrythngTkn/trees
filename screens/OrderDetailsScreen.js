@@ -6,20 +6,13 @@ import { getNavigationOptions } from '../navigation/NavigationOptions';
 class OrderDetailsScreen extends React.Component {
   static navigationOptions = getNavigationOptions;
 
-  componentWillMount() {
-    const { params } = this.props.navigation.state;
-    console.log(params);
-    //const itemId = params ? params.itemId : null;
-    // const otherParam = params ? params.otherParam : null;
-  }
-
   componentDidMount() {
     this.props.navigation.setParams({
      balance: this.props.balance,
      title: 'Your Order'
     });
   }
-  
+
   render() {
     const { title, description, image_url, price, transaction_uuid } = this.props.navigation.state.params;
     return (
