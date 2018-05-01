@@ -1,3 +1,4 @@
+import NavigationService from '../../navigation/NavigationService';
 import {
   REDEEM,
   REDEEM_SUCCESS,

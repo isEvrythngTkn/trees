@@ -1,7 +1,7 @@
 import { Notifications } from 'expo';
 import React from 'react';
 import { StackNavigator, SwitchNavigator } from 'react-navigation';
-
+import NavigationService from './NavigationService';
 import MainTabNavigator from './MainTabNavigator';
 import SignInScreen from '../screens/SignInScreen';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen'
@@ -46,7 +46,13 @@ export default class RootNavigator extends React.Component {
   }
 
   render() {
-    return <RootStackNavigator />;
+    return (
+      <RootStackNavigator 
+        ref={navigatorRef => {
+          NavigationService.setTopLevelNavigator(navigatorRef);
+        }}
+      />
+    );
   }
 
   _registerForPushNotifications() {

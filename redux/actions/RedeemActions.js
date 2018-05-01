@@ -1,3 +1,4 @@
+import NavigationService from '../../navigation/NavigationService';
 import { transferToCompany } from '../../api/ost';
 import { storeOrder } from '../../api/firebase';
 import { 
@@ -37,12 +38,10 @@ const _redeemSuccess = async (dispatch, item, response) => {
   
   try {
     await storeOrder(order);
+    NavigationService.navigate('OrderDetails', order);
     dispatch({ type: REDEEM_SUCCESS, payload: order });
   } catch (err) {
     // @TODO: need better error handling here
     console.log('Failed to store the order on Firebase', err);
   }
-
-  // doesn't seem like the balance is updated in time for me to get it.
-  // store.dispatch(fetchBalance({ userToken, ostUUID }));
 };
