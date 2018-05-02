@@ -6,6 +6,7 @@ import {
   AsyncStorage,
   StatusBar,
   StyleSheet,
+  Image,
   View,
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -45,8 +46,11 @@ class AuthLoadingScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ActivityIndicator />
-        <StatusBar barStyle="default" />
+        <Image
+            source={require('../assets/images/logo-icon.png')}
+            style={styles.logo}
+            resizeMode="contain"
+          />
       </View>
     );
   }
@@ -57,6 +61,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  logo: {
+    flex: .5,
+    marginBottom: 30
   }
 });
 
