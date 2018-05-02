@@ -4,12 +4,16 @@ import {
   Text,
   View,
   ImageBackground,
-  TouchableHighlight
+  TouchableHighlight,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 import { Button, Card } from 'react-native-elements';
-import { MyAppTitleText, MyAppText } from '../components/StyledText';
+import { 
+  MyAppTitleText, 
+  MyAppText,
+  MontserratBlack,
+} from '../components/StyledText';
 import { logoutUser } from '../redux/actions';
 import { getNavigationOptions } from '../navigation/NavigationOptions';
 import { ContainerStyle } from '../components/styles';
@@ -41,16 +45,13 @@ class HomeScreen extends React.Component {
           source={require('../assets/images/bg-vector-trees.jpg')}
           style={styles.primaryActionSection}>
           <Text style={styles.primaryActionText}>
-            <MyAppTitleText>
+            <MontserratBlack>
               Scan and Win!
-            </MyAppTitleText>
+            </MontserratBlack>
           </Text>
-          <TouchableHighlight onPress={this._goToPlay.bind(this)}>
-            <Ionicons name="md-qr-scanner" size={60} color="white" />
-          </TouchableHighlight>
           <Button 
             title="Play Now!" 
-            backgroundColor='#fff'
+            backgroundColor='#555'
             color='#74d3b3'
             borderRadius={4}
             icon={{name: 'check-circle', color: '#74d3b3' }}
@@ -58,7 +59,6 @@ class HomeScreen extends React.Component {
               paddingLeft: 40,
               paddingRight: 40
             }}
-
             onPress={this._goToPlay.bind(this)} />
         </ImageBackground>
       </View>
@@ -67,6 +67,9 @@ class HomeScreen extends React.Component {
 }
 
         /*
+        <TouchableHighlight onPress={this._goToPlay.bind(this)}>
+            <Ionicons name="md-qr-scanner" size={60} color="#555" />
+          </TouchableHighlight>
         <View style={ContainerStyle.styles}>
           <View style={welcomeContainer}>
             <Text style={treesTitle}>TREES</Text>
@@ -79,17 +82,25 @@ const styles = StyleSheet.create({
     flex: 1
   },
   primaryActionSection: {
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     alignItems: 'center',
     height: 300,
-    paddingTop: 10,
-    paddingBottom: 20
+    paddingTop: 40,
+    paddingBottom: 80
   },
   primaryActionText: {
     fontSize: 42,
-    //marginTop: 20,
-    color: '#fff'
-  }
+    color: '#555',
+    marginBottom: 25
+  },
+  // overlay: {
+  //   flex: 1,
+  //   backgroundColor: 'black',
+  //   opacity: 0.9,
+  //   position: 'absolute',
+  //   left: 0,
+  //   top: 0
+  // }
 });
 
 const mapStateToProps = state => {

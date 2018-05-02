@@ -5,7 +5,7 @@ import {
   View,
   Image
 } from 'react-native';
-import { MyAppTitleText } from './StyledText';
+import { MyAppTitleText, MyAppText } from './StyledText';
 import { connect } from 'react-redux';
 
 class NewHeader extends React.Component {
@@ -20,9 +20,9 @@ class NewHeader extends React.Component {
           </MyAppTitleText>
         </View>
         <View style={styles.balanceTextContainerStyle}>
-          <MyAppTitleText>
+          <MyAppText>
             <Text style={styles.balanceTextStyle}>{this.props.balance}</Text>
-          </MyAppTitleText>
+          </MyAppText>
           <Image
             source={require('../assets/images/icon-tree2.png')}
             style={styles.icon}
