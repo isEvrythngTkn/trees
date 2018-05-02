@@ -1,17 +1,15 @@
 import React from 'react';
 import {
-  AsyncStorage,
-  Image,
-  Platform,
-  ScrollView,
   StyleSheet,
   Text,
-  Button,
   View,
+  ImageBackground,
+  TouchableHighlight
 } from 'react-native';
 import { connect } from 'react-redux';
-import { WebBrowser } from 'expo';
-import { MonoText } from '../components/StyledText';
+import { Ionicons } from '@expo/vector-icons';
+import { Button, Card } from 'react-native-elements';
+import { MyAppTitleText, MyAppText } from '../components/StyledText';
 import { logoutUser } from '../redux/actions';
 import { getNavigationOptions } from '../navigation/NavigationOptions';
 import { ContainerStyle } from '../components/styles';
@@ -27,64 +25,70 @@ class HomeScreen extends React.Component {
     });
   }
 
-  header() {
-    return (
-      <Text>Enormous</Text>
-    );
-  }
-
   onSignoutButtonPress() {
     this.props.logoutUser();
     this.props.navigation.navigate('Auth');
   }
 
+  _goToPlay() {
+    this.props.navigation.navigate('Play');
+  }
+
   render() {
-    const { container, welcomeContainer, treesTitle, welcomeImage, contentContainer } = styles;
     return (
-      <View style={ContainerStyle.styles}>
-        <View style={welcomeContainer}>
-          <Text style={treesTitle}>TREES</Text>
-          <Text>Your Balance: {this.props.balance} Trees</Text>
-          <Image
-            source={require('../assets/images/logo-icon.png')}
-            style={welcomeImage}
-          />
-          <Button title="Logout" onPress={this.onSignoutButtonPress.bind(this)} />
-        </View>
+      <View style={styles.pageStyle}>
+        <ImageBackground 
+          source={require('../assets/images/bg-vector-trees.jpg')}
+          style={styles.primaryActionSection}>
+          <Text style={styles.primaryActionText}>
+            <MyAppTitleText>
+              Scan and Win!
+            </MyAppTitleText>
+          </Text>
+          <TouchableHighlight onPress={this._goToPlay.bind(this)}>
+            <Ionicons name="md-qr-scanner" size={60} color="white" />
+          </TouchableHighlight>
+          <Button 
+            title="Play Now!" 
+            backgroundColor='#fff'
+            color='#74d3b3'
+            borderRadius={4}
+            icon={{name: 'check-circle', color: '#74d3b3' }}
+            buttonStyle={{
+              paddingLeft: 40,
+              paddingRight: 40
+            }}
+
+            onPress={this._goToPlay.bind(this)} />
+        </ImageBackground>
       </View>
     );
   }
 }
 
+        /*
+        <View style={ContainerStyle.styles}>
+          <View style={welcomeContainer}>
+            <Text style={treesTitle}>TREES</Text>
+            <Text>Your Balance: {this.props.balance} Trees</Text>
+            <Button title="Logout" onPress={this.onSignoutButtonPress.bind(this)} />
+          </View>
+        </View>*/
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+  pageStyle: {
+    flex: 1
   },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
-  },
-  contentContainer: {
-    paddingTop: 30,
-  },
-  welcomeContainer: {
+  primaryActionSection: {
+    justifyContent: 'space-around',
     alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
+    height: 300,
+    paddingTop: 10,
+    paddingBottom: 20
   },
-  treesTitle: {
-    fontSize: 28
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
+  primaryActionText: {
+    fontSize: 42,
+    //marginTop: 20,
+    color: '#fff'
   }
 });
 

@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const commonContainerStyles = {
   padding: 10,
   paddingTop: 20,
-  backgroundColor: '#fff',
+  //backgroundColor: '#fff',
 };
 
 export const ContainerStyle = StyleSheet.create({

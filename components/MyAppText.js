@@ -5,7 +5,7 @@ import {
 
 class MyAppText extends React.Component {
   render() {
-    return <Text style={{ fontFamily: 'Roboto' }}>{this.props.children}</Text>;
+    return <Text style={{ fontFamily: 'OpenSans-Regular' }}>{this.props.children}</Text>;
   }
 }
 

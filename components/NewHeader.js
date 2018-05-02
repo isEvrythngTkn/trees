@@ -3,8 +3,9 @@ import {
   StyleSheet,
   Text,
   View,
+  Image
 } from 'react-native';
-import MyAppText from './MyAppText';
+import { MyAppTitleText } from './StyledText';
 import { connect } from 'react-redux';
 
 class NewHeader extends React.Component {
@@ -12,14 +13,21 @@ class NewHeader extends React.Component {
     return (
       <View style={styles.headerContainerStyle}>
         <View style={styles.titleTextContainerStyle}>
-          <MyAppText>
+          <MyAppTitleText>
             <Text style={styles.titleTextStyle}>
               {this.props.title}
             </Text>
-          </MyAppText>
+          </MyAppTitleText>
         </View>
         <View style={styles.balanceTextContainerStyle}>
-          <Text style={styles.balanceTextStyle}>{this.props.balance} T</Text>
+          <MyAppTitleText>
+            <Text style={styles.balanceTextStyle}>{this.props.balance}</Text>
+          </MyAppTitleText>
+          <Image
+            source={require('../assets/images/icon-tree2.png')}
+            style={styles.icon}
+            resizeMode="contain"
+          />
         </View>
       </View>
     );
@@ -31,14 +39,14 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 10,
-    paddingRight: 10
+    paddingLeft: 15,
+    paddingRight: 15,
   },
   titleTextContainerStyle: {
     flex: 3
   },
   titleTextStyle: {
-    fontSize: 26
+    fontSize: 28,
   },
   balanceTextContainerStyle: {
     flex: 1,
@@ -46,7 +54,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
   balanceTextStyle: {
-    fontSize: 15
+    fontSize: 16,
+    lineHeight: 30
+  },
+  icon: {
+    width: 24,
+    height: 24,
+    marginLeft: 5
   }
 });
 
