@@ -18,6 +18,7 @@ import { logoutUser } from '../redux/actions';
 import { getNavigationOptions } from '../navigation/NavigationOptions';
 import { ContainerStyle } from '../components/styles';
 
+const primaryActionTextColor = '#333';
 
 class HomeScreen extends React.Component {
   static navigationOptions = getNavigationOptions;
@@ -51,7 +52,7 @@ class HomeScreen extends React.Component {
           </Text>
           <Button 
             title="Play Now!" 
-            backgroundColor='#555'
+            backgroundColor={primaryActionTextColor}
             color='#74d3b3'
             borderRadius={4}
             icon={{name: 'check-circle', color: '#74d3b3' }}
@@ -68,7 +69,6 @@ class HomeScreen extends React.Component {
 
         /*
         <TouchableHighlight onPress={this._goToPlay.bind(this)}>
-            <Ionicons name="md-qr-scanner" size={60} color="#555" />
           </TouchableHighlight>
         <View style={ContainerStyle.styles}>
           <View style={welcomeContainer}>
@@ -82,25 +82,16 @@ const styles = StyleSheet.create({
     flex: 1
   },
   primaryActionSection: {
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     height: 300,
-    paddingTop: 40,
-    paddingBottom: 80
+    paddingTop: 50,
+    paddingBottom: 60
   },
   primaryActionText: {
     fontSize: 42,
-    color: '#555',
-    marginBottom: 25
-  },
-  // overlay: {
-  //   flex: 1,
-  //   backgroundColor: 'black',
-  //   opacity: 0.9,
-  //   position: 'absolute',
-  //   left: 0,
-  //   top: 0
-  // }
+    color: primaryActionTextColor,
+  }
 });
 
 const mapStateToProps = state => {

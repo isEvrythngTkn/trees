@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { Button } from 'react-native-elements';
+import { Button, Card } from 'react-native-elements';
 import QrCodeReader from '../components/QrCodeReader';
 import { userPlays, userWins, userLoses, playAgain } from '../redux/actions';
 import { getNavigationOptions } from '../navigation/NavigationOptions';
 import { ContainerStyle } from '../components/styles';
+import { MyAppText } from '../components/StyledText';
 
 class PlayScreen extends React.Component {
   static navigationOptions = getNavigationOptions;
@@ -36,8 +37,7 @@ class PlayScreen extends React.Component {
 
   renderQrCodeReader() {
     return (
-      <View style={styles.containerStyle}>
-        <Text>Scan a QR Code</Text>
+      <View style={{ flex: 1 }}>
         <QrCodeReader handleBarCodeRead={this.handleBarCodeRead.bind(this)} />
       </View>
     );
@@ -74,6 +74,23 @@ class PlayScreen extends React.Component {
     );
   }
 
+  renderPlay() {
+    return (
+      <View style={{ flex: 1 }}>
+        <View style={styles.scanner}>
+          {this.renderQrCodeReader()}
+        </View>
+        <View style={styles.instructionsContainer}>
+          <MyAppText>
+            <Text style={styles.instructionsText}>
+              Scan a QR code to play
+            </Text>
+          </MyAppText>
+        </View>
+      </View>
+    );
+  }
+
   render() {
     let content;
 
@@ -84,11 +101,11 @@ class PlayScreen extends React.Component {
     } else if (this.props.lost) {
       content = this.renderLoser();
     } else {
-      content = this.renderQrCodeReader(); 
+      content = this.renderPlay(); 
     }
 
     return (
-      <View style={ContainerStyle.styles}>
+      <View style={{ flex: 1 }}>
         {content}
       </View>
     );
@@ -96,11 +113,23 @@ class PlayScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  containerStyle: {
-    flex: 1,
-    padding: 15,
-    backgroundColor: '#fff',
+  instructionsContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff', 
+    alignSelf: 'stretch',
+    zIndex: 2,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: '#ccc',
+    flex: 1
   },
+  instructionsText: {
+    fontSize: 18,
+  },
+  scanner: {
+    flex: 4,
+    alignSelf: 'stretch',
+  }
 });
 
 const mapStateToProps = state => {

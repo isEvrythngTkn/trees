@@ -15,18 +15,16 @@ export default class QrCodeReader extends React.Component {
   render() {
     const { containerStyle } = styles;
     const { hasCameraPermission } = this.state;
+
     if (hasCameraPermission === null) {
       return <Text>Requesting for camera permission</Text>;
     } else if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>;
     } else {
       return (
-        <View style={{ flex: 1 }}>
-          <BarCodeScanner
-            onBarCodeRead={this.props.handleBarCodeRead}
-            style={styles.barCodeScannerStyle}
-          />
-        </View>
+        <BarCodeScanner
+          onBarCodeRead={this.props.handleBarCodeRead}
+          style={styles.barCodeScannerStyle} />
       );
     }
   }
@@ -34,7 +32,6 @@ export default class QrCodeReader extends React.Component {
 
 const styles = StyleSheet.create({
   barCodeScannerStyle: {
-    height: 400,
-    marginTop: 30
+    flex: 1
   }
 });
