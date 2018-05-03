@@ -3,10 +3,12 @@ import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { Button, Card } from 'react-native-elements';
 import QrCodeReader from '../components/QrCodeReader';
+import Win from '../components/Win';
+import Playing from '../components/Playing';
 import { userPlays, userWins, userLoses, playAgain } from '../redux/actions';
 import { getNavigationOptions } from '../navigation/NavigationOptions';
 import { ContainerStyle } from '../components/styles';
-import { MyAppText } from '../components/StyledText';
+import { MyAppText, MontserratBlack } from '../components/StyledText';
 
 class PlayScreen extends React.Component {
   static navigationOptions = getNavigationOptions;
@@ -44,14 +46,22 @@ class PlayScreen extends React.Component {
   }
 
   renderPlaying() {
-    return <View><Text>Playing...</Text></View>;
+    return (
+      <View style={styles.playingContainer}>
+        <Playing />
+      </View>
+    );
   }
 
   renderWinner() {
     return (
-      <View>
-        <Text>Winner! You won {this.props.amount} Trees.</Text>
-        {this.renderButtons()}
+      <View style={styles.winnerContainer}>
+        <View style={{ flex: 4 }}>
+          <Win amount={this.props.amount} />
+        </View>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          {this.renderButtons()}
+        </View>
       </View>
     );
   }
@@ -65,11 +75,25 @@ class PlayScreen extends React.Component {
     );;
   }
 
+  renderButton(title, onPress, backgroundColor) {
+    return (
+      <Button 
+        title={title} 
+        onPress={onPress} 
+        backgroundColor={backgroundColor}
+        color='#fff'
+        borderRadius={5}
+        containerViewStyle={styles.buttonContainer}
+        buttonStyle={styles.button}
+      />
+    );
+  }
+
   renderButtons() {
     return (
-      <View>
-        <Button title="Play Again!" onPress={this.onPlayAgainPress.bind(this)} />
-        <Button title="Redeem" onPress={this.onRedeemPress.bind(this)} />
+      <View style={styles.buttonsContainer}>
+        {this.renderButton('Play Again!', this.onPlayAgainPress.bind(this), '#444')}
+        {this.renderButton('Redeem!', this.onRedeemPress.bind(this), '#2A4F6E')}
       </View>
     );
   }
@@ -119,8 +143,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff', 
     alignSelf: 'stretch',
     zIndex: 2,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: '#ccc',
     flex: 1
   },
   instructionsText: {
@@ -129,6 +151,29 @@ const styles = StyleSheet.create({
   scanner: {
     flex: 4,
     alignSelf: 'stretch',
+  },
+  buttonContainer: {
+    flex: 1,
+    margin: 0,
+    backgroundColor: '#ff0000'
+  },
+  buttonsContainer: { 
+    flex: 1, 
+    flexDirection: 'row', 
+    alignItems: 'center' 
+  },
+  winnerContainer: { 
+    flex: 1,
+    padding: 10,
+    paddingTop: 20,
+    paddingBottom: 20,
+    backgroundColor: '#fff'
+  },
+  playingContainer: {
+    flex: 1, 
+    backgroundColor: '#042037', 
+    padding: 20, 
+    justifyContent: 'center'
   }
 });
 

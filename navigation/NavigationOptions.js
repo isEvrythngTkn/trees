@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import NewHeader from '../components/NewHeader';
 
 export const getNavigationOptions = ({ navigation }) => {
@@ -12,6 +13,8 @@ export const getNavigationOptions = ({ navigation }) => {
       height: 72,
       elevation: 0,       //remove shadow on Android
       shadowOpacity: 0,   //remove shadow on iOS,
+      borderBottomWidth: StyleSheet.hairlineWidth,
+      borderBottomColor: '#ccc',
     }
   }
 };
