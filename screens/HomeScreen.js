@@ -62,6 +62,9 @@ class HomeScreen extends React.Component {
             }}
             onPress={this._goToPlay.bind(this)} />
         </ImageBackground>
+        <View style={ContainerStyle.styles}>
+          <Button title="Logout" onPress={this.onSignoutButtonPress.bind(this)} />
+        </View>
       </View>
     );
   }

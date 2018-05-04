@@ -25,7 +25,10 @@ class RedeemScreen extends React.Component {
           data={this.props.redeemables}
           renderItem={this.renderRow.bind(this)}
           keyExtractor={(item, index) => index.toString()}
-          contentContainerStyle={FlatListStyle.styles}
+          contentContainerStyle={{
+            backgroundColor: '#eee',
+            paddingBottom: 30
+          }}
         />
     );
   }

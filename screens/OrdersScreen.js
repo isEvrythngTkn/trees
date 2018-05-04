@@ -13,7 +13,7 @@ class OrdersScreen extends React.Component {
   componentDidMount() {
     this.props.navigation.setParams({
      balance: this.props.balance,
-     title: 'Your Orders'
+     title: 'Past Orders'
     });
   }
 
@@ -33,10 +33,10 @@ class OrdersScreen extends React.Component {
     } else {
       return (
         <FlatList
-          data={orders}
+          data={_.reverse(orders)}
           renderItem={this.renderRow.bind(this)}
           keyExtractor={(item, index) => index.toString()}
-          contentContainerStyle={FlatListStyle.styles}
+          contentContainerStyle={{ paddingBottom: 30 }}
         />
       );
     }

@@ -4,12 +4,14 @@ import {
   TouchableWithoutFeedback, 
   View,
   Image,
-  LayoutAnimation
+  LayoutAnimation,
+  StyleSheet
 } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Card, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Confirm from './Confirm';
 import { userRedeems, fetchBalance } from '../redux/actions';
+import { MyAppText } from './StyledText';
 
 class Item extends Component {
   state = { showModal: false };
@@ -35,15 +37,32 @@ class Item extends Component {
     const { id, title, description, image_url, price } = this.props.item;
 
     return (
-      <View>
-        <Image 
-          style={{ width: 100, height: 100 }}
-          source={{ uri: image_url }}
-        />
-        <Text>{title}</Text>
-        <Text style={{ flex: 1 }}>{description}</Text>
-        <Text>{price} Trees</Text>
-        <Button title="Redeem" onPress={() => this.setState({ showModal: !this.state.showModal })} />
+      <Card title={title}>
+        <View style={styles.container}>
+          
+          <Image 
+            style={{ width: 100, height: 100 }}
+            resizeMode="contain"
+            source={{ uri: image_url }}
+          />
+          
+          <View style={{ marginLeft: 10 }}>
+            <MyAppText>
+              <Text style={styles.price}>{price} <Text style={{ fontSize: 13 }}>Trees</Text></Text>
+            </MyAppText>
+            <MyAppText>
+              <Text style={styles.description}>{description}</Text>
+            </MyAppText>
+          </View>
+        </View>
+        <Button 
+          title="Order" 
+          onPress={() => this.setState({ showModal: !this.state.showModal })}
+          containerViewStyle={{ width: '100%', marginLeft: 0 }}
+          backgroundColor='#2A4F6E'
+          icon={{name: 'add-circle', color: '#74d3b3' }}
+          />
+
         <Confirm
             visible={this.state.showModal}
             onAccept={this.onAccept.bind(this)}
@@ -51,10 +70,25 @@ class Item extends Component {
         >
             Are you sure you want to redeem your TREES?
         </Confirm>
-      </View>
+      </Card>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: { 
+    flex: 1, 
+    flexDirection: 'row', 
+    marginBottom: 15 
+  },
+  price: {
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+  description: {
+    fontSize: 16
+  }
+});
 
 const mapStateToProps = state => {
   const { ostUUID, userToken } = state.auth;

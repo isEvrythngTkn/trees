@@ -6,7 +6,7 @@ import {
   Image,
   LayoutAnimation
 } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 class OrderListItem extends Component {
@@ -28,21 +28,25 @@ class OrderListItem extends Component {
   }
 
   render() {
-    const { title, description, image_url, price, completed } = this.props.order;
+    const { title, description, image_url, price, completed, date, response_date } = this.props.order;
 
     return (
-      <TouchableWithoutFeedback onPress={this.viewOrderDetails.bind(this)}>
-        <View>
-          <Image 
-            style={{ width: 100, height: 100 }}
-            source={{ uri: image_url }}
-          />
-          <Text>{title}</Text>
-          <Text style={{ flex: 1 }}>{description}</Text>
-          <Text>{price} Trees</Text>
-          {this.renderCompleted(completed)}
-        </View>
-      </TouchableWithoutFeedback>
+      <Card title={`${title} - ${response_date.substring(0, 16)}`}>
+        <TouchableWithoutFeedback onPress={this.viewOrderDetails.bind(this)}>
+          <View style={{ flex: 1, flexDirection: 'row' }}>
+            <Image 
+              style={{ width: 100, height: 100 }}
+              source={{ uri: image_url }}
+              resizeMode='contain'
+            />
+            <View style={{ marginLeft: 10}}>
+              <Text>{price} Trees</Text>
+              <Text style={{ flex: 1 }}>{description}</Text>
+              {this.renderCompleted(completed)}
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </Card>
     );
   }
 }
