@@ -15,6 +15,10 @@ import { StackNavigator, SwitchNavigator } from 'react-navigation'; // Version c
 import { emailChanged, passwordChanged, loginUser } from '../redux/actions';
 
 class SignInScreen extends React.Component {
+  state = {
+    loading: false
+  }
+
   static navigationOptions = {
     header: null,
   };
@@ -40,7 +44,7 @@ class SignInScreen extends React.Component {
 
   onButtonPress() {
     const { email, password } = this.props;
-
+    this.setState({ loading: true });
     this.props.loginUser({ email, password });
   }
 
@@ -74,6 +78,7 @@ class SignInScreen extends React.Component {
               title="Sign in!" 
               backgroundColor="#74d3b3"
               borderRadius={5}
+              loading={this.state.loading}
               onPress={this.onButtonPress.bind(this)} />
           </Card>
       </ImageBackground>
