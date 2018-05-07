@@ -79,7 +79,7 @@ class Item extends Component {
             onAccept={this.onAccept.bind(this)}
             onDecline={this.onDecline.bind(this)}
         >
-            Are you sure you want to redeem your TREES?
+            Are you sure you want to redeem {price} TREES for {title}?
         </Confirm>
       </Card>
     );

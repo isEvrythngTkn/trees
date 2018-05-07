@@ -15,8 +15,20 @@ const Confirm = ({ children, visible, onAccept, onDecline }) => {
       <View style={containerStyle}>
         <Text style={textStyle}>{children}</Text>
         <View style={buttonWrapperStyle}>
-          <Button title="No" onPress={onDecline} />
-          <Button title="Yes" onPress={onAccept} />
+          <Button 
+            containerViewStyle={styles.buttonStyle} 
+            title="No" 
+            onPress={onDecline} 
+            large
+            backgroundColor='#444'
+          />
+          <Button 
+            containerViewStyle={styles.buttonStyle} 
+            title="Yes" 
+            onPress={onAccept} 
+            large
+            backgroundColor='#5E9732'
+          />
         </View>
       </View>
     </Modal>
@@ -25,16 +37,23 @@ const Confirm = ({ children, visible, onAccept, onDecline }) => {
 
 const styles = {
   containerStyle: {
-    backgroundColor: 'rgba(255, 255, 255, .9)',
+    backgroundColor: 'rgba(255, 255, 255, .95)',
     position: 'relative',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
   textStyle: {
-    fontSize: 18,
+    fontSize: 26,
     textAlign: 'center',
-    lineHeight: 40
+    lineHeight: 40,
+    marginBottom: 40
+  },
+  buttonWrapperStyle: {
+    flexDirection: 'row'
+  },
+  buttonStyle: {
+    flex: 1
   }
 };
 
