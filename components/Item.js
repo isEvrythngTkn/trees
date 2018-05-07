@@ -12,21 +12,12 @@ import { connect } from 'react-redux';
 import Confirm from './Confirm';
 import { userRedeems, fetchBalance } from '../redux/actions';
 import { MyAppText } from './StyledText';
+import { productShots } from '../assets/images';
 
 class Item extends Component {
   state = { 
     showModal: false,
-    productShots: {}
   };
-
-  componentWillMount() {
-    productShots = {
-      tshirt: require('../assets/images/trees_shirt_and_hat.jpg'),
-      hat: require('../assets/images/hat.jpg'),
-      placeholder: require('../assets/images/placeholder.png')
-    };
-    this.setState({ productShots });
-  }
 
   componentWillUpdate() {
     LayoutAnimation.spring();
@@ -55,7 +46,7 @@ class Item extends Component {
           <Image 
             style={{ width: 100, height: 100 }}
             resizeMode="contain"
-            source={this.state.productShots[image_key]}
+            source={productShots[image_key]}
           />          
           <View style={{ marginLeft: 10 }}>
             <MyAppText>
