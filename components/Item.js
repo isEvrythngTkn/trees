@@ -59,7 +59,7 @@ class Item extends Component {
           title="Order" 
           onPress={() => this.setState({ showModal: !this.state.showModal })}
           containerViewStyle={{ width: '100%', marginLeft: 0 }}
-          backgroundColor='#2A4F6E'
+          backgroundColor='#496C89'
           icon={{name: 'add-circle', color: '#74d3b3' }}
           />
 
