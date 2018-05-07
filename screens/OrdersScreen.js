@@ -22,8 +22,6 @@ class OrdersScreen extends React.Component {
   }
 
   renderRow(order) {
-    console.log('order', order)
-    console.log('order created', order.created);
     return <OrderListItem order={order.item} navigation={this.props.navigation} />
   }
 
