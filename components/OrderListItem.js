@@ -8,8 +8,10 @@ import {
 } from 'react-native';
 import { Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
+import { productShots } from '../assets/images';
 
 class OrderListItem extends Component {
+
   componentWillUpdate() {
     LayoutAnimation.spring();
   }
@@ -28,7 +30,7 @@ class OrderListItem extends Component {
   }
 
   render() {
-    const { title, description, image_url, price, completed, date, response_date } = this.props.order;
+    const { title, description, image_key, price, completed, date, response_date } = this.props.order;
 
     return (
       <Card title={`${title} - ${response_date.substring(0, 16)}`}>
@@ -36,7 +38,7 @@ class OrderListItem extends Component {
           <View style={{ flex: 1, flexDirection: 'row' }}>
             <Image 
               style={{ width: 100, height: 100 }}
-              source={{ uri: image_url }}
+              source={productShots[image_key]}
               resizeMode='contain'
             />
             <View style={{ marginLeft: 10}}>
