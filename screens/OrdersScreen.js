@@ -22,18 +22,28 @@ class OrdersScreen extends React.Component {
   }
 
   renderRow(order) {
+    console.log('order', order)
+    console.log('order created', order.created);
     return <OrderListItem order={order.item} navigation={this.props.navigation} />
   }
 
+  prepareOrders(orders) {
+    let unsortedOrders = _.map(this.props.orders, (value, key) => {
+      value._id = key;
+      return value;
+    });
+    return _.reverse(_.sortBy(orders, (order) => { return order.created }));
+  }
+
   render() {
-    let orders = _.values(this.props.orders);
+    const orders = this.prepareOrders(this.props.orders);
 
     if (_.isEmpty(orders)) {
       return <Text>No Orders</Text>;
     } else {
       return (
         <FlatList
-          data={_.reverse(orders)}
+          data={orders}
           renderItem={this.renderRow.bind(this)}
           keyExtractor={(item, index) => index.toString()}
           contentContainerStyle={{ paddingBottom: 30 }}

@@ -7,6 +7,7 @@ import {
   LayoutAnimation
 } from 'react-native';
 import { Button, Card } from 'react-native-elements';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import { productShots } from '../assets/images';
 
@@ -18,7 +19,11 @@ class OrderListItem extends Component {
 
   viewOrderDetails() {
     console.log('view order details', this.props.order);
-    this.props.navigation.navigate('OrderDetails', this.props.order);
+    const newProps = {
+      ...this.props.order,
+      orderTitle: this.props.order.title
+    }
+    this.props.navigation.navigate('OrderDetails', newProps);
   }
 
   renderCompleted(completed) {
@@ -30,10 +35,10 @@ class OrderListItem extends Component {
   }
 
   render() {
-    const { title, description, image_key, price, completed, date, response_date } = this.props.order;
+    const { title, description, image_key, price, completed, date, created, transaction_uuid } = this.props.order;
 
     return (
-      <Card title={`${title} - ${response_date.substring(0, 16)}`}>
+      <Card title={`${title} - ${moment(created).format('MMM D, YYYY')}`}>
         <TouchableWithoutFeedback onPress={this.viewOrderDetails.bind(this)}>
           <View style={{ flex: 1, flexDirection: 'row' }}>
             <Image 
