@@ -12,11 +12,11 @@ export const userPlays = ({ userToken, uuid, kind }) => {
   return (dispatch) => {
     dispatch({ type: USER_PLAYING });
 
-    //if (Math.random() >= 0.5) {
-    userWins(dispatch, uuid, kind);
-    //} else {
-      //userLoses(dispatch);
-    //}
+    if (Math.random() >= 0.5) {
+      userWins(dispatch, uuid, kind);
+    } else {
+      userLoses(dispatch);
+    }
   };
 };
 
@@ -37,7 +37,9 @@ const userWins = async (dispatch, uuid, kind) => {
 }
 
 const userLoses = (dispatch) => {
-  dispatch({ type: USER_LOSE });
+  setTimeout(() => {
+    dispatch({ type: USER_LOSE });
+  }, 5000);
 }
 
 export const playAgain = () => {

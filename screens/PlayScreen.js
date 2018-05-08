@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Button, Card } from 'react-native-elements';
 import QrCodeReader from '../components/QrCodeReader';
 import Win from '../components/Win';
+import Lose from '../components/Lose';
 import Playing from '../components/Playing';
 import { userPlays, userWins, userLoses, playAgain } from '../redux/actions';
 import { getNavigationOptions } from '../navigation/NavigationOptions';
@@ -59,7 +60,7 @@ class PlayScreen extends React.Component {
         <View style={{ flex: 4 }}>
           <Win amount={this.props.amount} />
         </View>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={styles.centered}>
           {this.renderButtons()}
         </View>
       </View>
@@ -68,9 +69,13 @@ class PlayScreen extends React.Component {
 
   renderLoser() {
     return (
-      <View>
-        <Text>You Lost!</Text>
-        {this.renderButtons()}
+      <View style={styles.winnerContainer}>
+        <View style={{ flex: 4 }}>
+          <Lose />
+        </View>
+        <View style={styles.centered}>
+          {this.renderButtons()}
+        </View>
       </View>
     );;
   }
@@ -174,6 +179,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#042037', 
     padding: 20, 
     justifyContent: 'center'
+  },
+  centered: { 
+    flex: 1, 
+    justifyContent: 'center',
+    alignItems: 'center' 
   }
 });
 
