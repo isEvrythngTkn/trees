@@ -17,7 +17,7 @@
 "title": "Hat",
 "description": "Hat that says it all.",
 "image_key": "hat",
-"transaction_kind": "Redeem50",
-"price": 50
+"transaction_kind": "Redeem10",
+"price": 10
 }
 ]

@@ -61,7 +61,6 @@ class HomeScreen extends React.Component {
               onPress={this._goToPlay.bind(this)} />
           </ImageBackground>
         
-        
           <ImageBackground 
           source={require('../assets/images/misty-trees.jpg')}
           borderRadius={10}
@@ -96,17 +95,6 @@ class HomeScreen extends React.Component {
   }
 }
 
-        /*
-                    
-        <TouchableHighlight onPress={this._goToPlay.bind(this)}>
-          </TouchableHighlight>
-        <View style={ContainerStyle.styles}>
-          <View style={welcomeContainer}>
-            <Text style={treesTitle}>TREES</Text>
-            <Text>Your Balance: {this.props.balance} Trees</Text>
-            
-          </View>
-        </View>*/
 const styles = StyleSheet.create({
   actionSection: {
     height: 240,
