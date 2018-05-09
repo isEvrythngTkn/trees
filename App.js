@@ -43,7 +43,7 @@ export default class App extends React.Component {
       Asset.loadAsync([
         require('./assets/images/logo-icon.png'),
         require('./assets/images/bg-vector-trees.jpg'),
-        require('./assets/images/icon-tree2.png'),
+        require('./assets/images/icon-tree3.png'),
         require('./assets/images/hat.jpg'),
         require('./assets/images/trees_shirt_and_hat.jpg'),
         require('./assets/images/placeholder.png'),

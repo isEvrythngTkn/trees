@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 
@@ -56,10 +56,34 @@ export default TabNavigator(
           />
         );
       },
+      tabBarLabel: ({ focused }) => {
+        const { routeName } = navigation.state;
+        let color = focused ? Colors.tabIconSelected : Colors.tabIconDefault;
+
+        return (
+          <View>
+            <Text style={{ color, textAlign: 'center' }}>
+              {routeName}
+            </Text>
+          </View>
+        )
+      },
     }),
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
-    animationEnabled: false,
-    swipeEnabled: false,
+    animationEnabled: true,
+    lazy: false,
+    swipeEnabled: true,
+    tabBarOptions: {
+      style: {
+        height: 70,
+        paddingBottom: 10,
+        paddingTop: 5,
+        backgroundColor: '#fff'
+      },
+      labelStyle: {
+        fontSize: 13
+      }
+    },
   }
 );

@@ -13,8 +13,9 @@ export const getNavigationOptions = ({ navigation }) => {
       height: 72,
       elevation: 0,       //remove shadow on Android
       shadowOpacity: 0,   //remove shadow on iOS,
-      borderBottomWidth: StyleSheet.hairlineWidth,
-      borderBottomColor: '#ccc',
+      //borderBottomWidth: StyleSheet.hairlineWidth,
+      //borderBottomColor: '#ccc',
+      backgroundColor: '#489174'
     }
   }
 };

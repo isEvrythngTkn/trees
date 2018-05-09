@@ -24,7 +24,7 @@ class NewHeader extends React.Component {
             <Text style={styles.balanceTextStyle}>{this.props.balance}</Text>
           </MyAppText>
           <Image
-            source={require('../assets/images/icon-tree2.png')}
+            source={require('../assets/images/icon-tree3.png')}
             style={styles.icon}
             resizeMode="contain"
           />
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   },
   titleTextStyle: {
     fontSize: 28,
+    color: 'white'
   },
   balanceTextContainerStyle: {
     flex: 1,
@@ -55,7 +56,8 @@ const styles = StyleSheet.create({
   },
   balanceTextStyle: {
     fontSize: 16,
-    lineHeight: 30
+    lineHeight: 30,
+    color: 'white'
   },
   icon: {
     width: 24,
