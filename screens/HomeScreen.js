@@ -11,7 +11,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { Button, Card } from 'react-native-elements';
 import { MyAppText, MontserratBlack } from '../components/StyledText';
 import { getNavigationOptions } from '../navigation/NavigationOptions';
-import { ContainerStyle } from '../components/styles';
 
 const primaryActionTextColor = '#333';
 
@@ -32,7 +31,7 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.pageStyle}>
-        <View style={{ backgroundColor: 'white', flex: 1, padding: 20 }}>
+        <View style={{ padding: 20 }}>
           <ImageBackground 
             source={require('../assets/images/bg-vector-trees.jpg')}
             borderRadius={10}
@@ -79,6 +78,10 @@ class HomeScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  pageStyle: {
+    flex: 1,
+    backgroundColor: '#fff'
+  },
   actionSection: {
     height: 240,
     padding: 20,

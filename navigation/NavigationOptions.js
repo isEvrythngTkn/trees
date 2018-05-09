@@ -9,6 +9,7 @@ export const getNavigationOptions = ({ navigation }) => {
 
   return {
     headerTitle: <NewHeader balance={balance} title={title} navigation={navigation} />,
+    headerTintColor: 'white',
     headerStyle: { 
       height: 72,
       elevation: 0,       //remove shadow on Android
