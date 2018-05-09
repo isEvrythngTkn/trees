@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 import { Button, Card } from 'react-native-elements';
 import { MyAppText, MontserratBlack } from '../components/StyledText';
-import { logoutUser } from '../redux/actions';
 import { getNavigationOptions } from '../navigation/NavigationOptions';
 import { ContainerStyle } from '../components/styles';
 
@@ -24,11 +23,6 @@ class HomeScreen extends React.Component {
      balance: this.props.balance,
      title: 'Home'
     });
-  }
-
-  onSignoutButtonPress() {
-    this.props.logoutUser();
-    this.props.navigation.navigate('Auth');
   }
 
   _goToPlay() {
@@ -78,17 +72,6 @@ class HomeScreen extends React.Component {
               </Text>
             </View>
           </ImageBackground>
-          <View style={styles.separator}>
-            <Button 
-              title="Logout" 
-              onPress={this.onSignoutButtonPress.bind(this)}
-              containerViewStyle={{ width: '100%', marginLeft: 0 }}
-              backgroundColor='#333'
-              large
-              borderRadius={10}
-              //icon={{name: 'add-circle', color: '#74d3b3' }}
-              />
-          </View>
         </View>
       </ScrollView>
     );
@@ -136,4 +119,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { logoutUser })(HomeScreen);
+export default connect(mapStateToProps, {})(HomeScreen);

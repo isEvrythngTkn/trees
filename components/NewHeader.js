@@ -3,8 +3,10 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { MyAppTitleText, MyAppText } from './StyledText';
 import { connect } from 'react-redux';
 
@@ -19,6 +21,17 @@ class NewHeader extends React.Component {
             </Text>
           </MyAppTitleText>
         </View>
+        <View style={styles.settings}>
+          <TouchableOpacity onPress={() => {
+            this.props.navigation.navigate('Settings');
+          }}>
+            <Ionicons
+              name='md-settings'
+              size={28}
+              color='white'
+            />
+          </TouchableOpacity>
+        </View>
         <View style={styles.balanceTextContainerStyle}>
           <MyAppText>
             <Text style={styles.balanceTextStyle}>{this.props.balance}</Text>
@@ -29,6 +42,7 @@ class NewHeader extends React.Component {
             resizeMode="contain"
           />
         </View>
+        
       </View>
     );
   }
@@ -50,12 +64,11 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   balanceTextContainerStyle: {
-    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
   balanceTextStyle: {
-    fontSize: 16,
+    fontSize: 18,
     lineHeight: 30,
     color: 'white'
   },
@@ -63,6 +76,9 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     marginLeft: 5
+  },
+  settings: {
+    marginRight: 25
   }
 });
 
