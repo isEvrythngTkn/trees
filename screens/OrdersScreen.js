@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getNavigationOptions } from '../navigation/NavigationOptions';
 import { ordersFetch } from '../redux/actions';
 import OrderListItem from '../components/OrderListItem';
+import { MyAppText } from '../components/StyledText';
 import { FlatListStyle } from '../components/styles';
 
 class OrdersScreen extends React.Component {
@@ -37,7 +38,13 @@ class OrdersScreen extends React.Component {
     const orders = this.prepareOrders(this.props.orders);
 
     if (_.isEmpty(orders)) {
-      return <Text>No Orders</Text>;
+      return (
+        <View style={{ alignItems: 'center', flex: 1, paddingTop: 30 }}>
+          <Text style={{ fontSize: 24 }}>
+            <MyAppText>No Orders</MyAppText>
+          </Text>
+        </View>
+      );
     } else {
       return (
         <FlatList
