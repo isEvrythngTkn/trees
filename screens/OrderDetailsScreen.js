@@ -30,6 +30,17 @@ class OrderDetailsScreen extends React.Component {
       completed_at
     } = this.props.navigation.state.params;
 
+    const orderId = _id ? (
+      <View>
+        <Text style={styles.ids}>
+          <MyAppText>Order id: {_id}</MyAppText>
+        </Text>
+        <View style={styles.spacer} />
+      </View>
+    ) : (
+      <View />
+    );
+
     const status = completed ? 
       `You picked up this order on ${moment(completed_at).format('ddd, MMM D, YYYY')}` : 'You have not yet picked up this order.';
 
@@ -57,13 +68,9 @@ class OrderDetailsScreen extends React.Component {
             </View>
           </View>
           <View style={styles.idsWrapper}>
+            {orderId}
             <Text style={styles.ids}>
-              <MyAppText>Order id: {_id}</MyAppText>
-            </Text>
-            <View style={styles.spacer}>
-            </View>
-            <Text style={styles.ids}>
-              <MyAppText>Transaction: {transaction_uuid}</MyAppText>
+              <MyAppText>Transaction ID: {transaction_uuid}</MyAppText>
             </Text>
           </View>
           <View>
