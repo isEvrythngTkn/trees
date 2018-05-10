@@ -9,8 +9,14 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { MyAppTitleText, MyAppText } from './StyledText';
 import { connect } from 'react-redux';
+import { playAgain } from '../redux/actions/PlayActions';
 
 class NewHeader extends React.Component {
+  onSettingsPress() {
+    this.props.navigation.navigate('Settings');
+    this.props.playAgain();
+  }
+
   render() {
     return (
       <View style={styles.headerContainerStyle}>
@@ -22,9 +28,7 @@ class NewHeader extends React.Component {
           </MyAppTitleText>
         </View>
         <View style={styles.settings}>
-          <TouchableOpacity onPress={() => {
-            this.props.navigation.navigate('Settings');
-          }}>
+          <TouchableOpacity onPress={this.onSettingsPress.bind(this)}>
             <Ionicons
               name='md-settings'
               size={28}
@@ -89,4 +93,4 @@ const mapStateToProps = state => {
   };
 }
 
-export default connect(mapStateToProps, {})(NewHeader);
+export default connect(mapStateToProps, { playAgain })(NewHeader);
