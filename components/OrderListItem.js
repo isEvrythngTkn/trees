@@ -7,6 +7,7 @@ import {
   LayoutAnimation,
   StyleSheet
 } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 import { Button, Card } from 'react-native-elements';
 import moment from 'moment';
 import { connect } from 'react-redux';
@@ -48,7 +49,7 @@ class OrderListItem extends Component {
         <View>
           <View style={{ flex: 1, flexDirection: 'row' }}>
             <Image 
-              style={{ width: 75, height: 75 }}
+              style={{ width: 75, height: 75, borderColor: '#ccc', borderWidth: .5 }}
               source={productShots[image_key]}
               resizeMode='contain'
             />
@@ -62,6 +63,11 @@ class OrderListItem extends Component {
             </View>
           </View>
           <View style={styles.statusWrap}>
+            <Feather 
+              name={ completed ? 'check-circle' : 'alert-circle'} 
+              size={20} 
+              color={ completed ? 'green' : '#daa50f' }
+              style={{ marginRight: 10 }} />
             <MyAppText>{status}</MyAppText>
           </View>
           <View style={styles.buttonWrap}>
@@ -87,10 +93,14 @@ const styles = StyleSheet.create({
   statusWrap: {
     alignItems: 'center',
     paddingTop: 10,
-    paddingBottom: 5,
+    paddingBottom: 10,
     borderTopWidth: .5,
     borderTopColor: '#ccc',
-    marginTop: 15
+    borderBottomWidth: .5,
+    borderBottomColor: '#ccc',
+    marginTop: 15,
+    marginBottom: 5,
+    flexDirection: 'row'
   },
   title: {
     fontSize: 18
