@@ -10,13 +10,14 @@ import {
   FETCHED_BALANCE,
   FETCHED_USER_TOKEN
 } from './types';
-import { createUser, getUserBalance } from '../../api/ost';
+import { createUser, getUserBalance, transferToUser } from '../../api/ost';
 import { 
   register, 
   login,
   createUserRecordWithUUID,
   getUserUUID
 } from '../../api/firebase';
+import { TWENTY_FIVE, transactionKinds } from '../../constants/TransactionKinds';
 
 export const emailChanged = (text) => {
   return {
@@ -58,6 +59,11 @@ const userCreateSuccess = async (dispatch, user) => {
   // and store their OST UUID in Firebase
   try {
     const ostUUID = await createUser(user.uid);
+    console.log('about to transfer to user a tenner');
+    setTimeout(() => {
+      transferToUser(TWENTY_FIVE, ostUUID);
+    }, 4000);
+    dispatch({ type: FETCHED_BALANCE, payload: transactionKinds[TWENTY_FIVE].amount });
     await createUserRecordWithUUID(ostUUID);
     dispatch({ type: CREATE_USER_SUCCESS, payload: { user, ostUUID } });
   } catch (err) {

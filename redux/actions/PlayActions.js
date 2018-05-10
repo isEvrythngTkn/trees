@@ -12,11 +12,11 @@ export const userPlays = ({ userToken, uuid, kind }) => {
   return (dispatch) => {
     dispatch({ type: USER_PLAYING });
 
-    if (Math.random() >= 0.5) {
-      userWins(dispatch, uuid, kind);
-    } else {
-      userLoses(dispatch);
-    }
+    //if (Math.random() >= 0.5) {
+    userWins(dispatch, uuid, kind);
+    //} else {
+    //  userLoses(dispatch);
+    // }
   };
 };
 
@@ -27,7 +27,7 @@ const userWins = async (dispatch, uuid, kind) => {
     // forced delay so it seems like something is happening
     setTimeout(() => {
       dispatch({ type: USER_WIN, payload: kind });  
-    }, 5000);
+    }, 0);
     
   } catch (err) {
     console.log('Failed to transfer funds', err);
