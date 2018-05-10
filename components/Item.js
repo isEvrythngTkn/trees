@@ -11,7 +11,7 @@ import { Card, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Confirm from './Confirm';
 import { userRedeems, fetchBalance } from '../redux/actions';
-import { MyAppText } from './StyledText';
+import { MyAppText, MyAppTitleText } from './StyledText';
 import { productShots } from '../assets/images';
 
 class Item extends Component {
@@ -40,21 +40,33 @@ class Item extends Component {
     const { id, title, description, image_key, price } = this.props.item;
     
     return (
-      <Card title={title}>
+      <Card 
+        image={productShots[image_key]}
+        imageProps={{
+          resizeMode: 'cover'
+        }}
+        imageStyle={{
+          height: 300,
+          borderBottomWidth: .5,
+          borderBottomColor: '#ccc',
+          marginBottom: 10
+        }}>
+
         <View style={styles.container}>
-          
-          <Image 
-            style={{ width: 100, height: 100 }}
-            resizeMode="contain"
-            source={productShots[image_key]}
-          />          
-          <View style={{ marginLeft: 10 }}>
+          <MyAppTitleText>
+            <Text style={{ fontSize: 20 }}>
+              {title}
+            </Text>
+          </MyAppTitleText>
+          <View>
             <MyAppText>
               <Text style={styles.price}>{price} <Text style={{ fontSize: 13 }}>Trees</Text></Text>
             </MyAppText>
-            <MyAppText>
-              <Text style={styles.description}>{description}</Text>
-            </MyAppText>
+            <View style={styles.descriptionView}>
+              <MyAppText>
+                <Text style={styles.description}>{description}</Text>
+              </MyAppText>
+            </View>
           </View>
         </View>
         <Button 
@@ -76,25 +88,23 @@ class Item extends Component {
     );
   }
 }
-/*
-<Image 
-            style={{ width: 100, height: 100 }}
-            resizeMode="contain"
-            source={required_image}
-          />
-*/
+
 const styles = StyleSheet.create({
-  container: { 
-    flex: 1, 
-    flexDirection: 'row', 
-    marginBottom: 15 
+  container: {
+    marginBottom: 15,
+    //borderTopWidth: .5,
+    //borderTopColor: '#ccc',
   },
   price: {
     fontSize: 18,
     fontWeight: 'bold'
   },
+  descriptionView: {
+    marginTop: 20
+  },
   description: {
-    fontSize: 16
+    fontSize: 16,
+    lineHeight: 26
   }
 });
 

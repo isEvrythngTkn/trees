@@ -1,5 +1,5 @@
 export const productShots = {
-  tshirt: require('./trees_shirt_and_hat.jpg'),
+  grinder: require('./grinder.jpg'),
   hat: require('./hat.jpg'),
-  placeholder: require('./placeholder.png')
+  buddah: require('./buddah.jpg'),
 };

@@ -45,8 +45,8 @@ export default class App extends React.Component {
         require('./assets/images/bg-vector-trees.jpg'),
         require('./assets/images/icon-tree3.png'),
         require('./assets/images/hat.jpg'),
-        require('./assets/images/trees_shirt_and_hat.jpg'),
-        require('./assets/images/placeholder.png'),
+        require('./assets/images/grinder.jpg'),,
+        require('./assets/images/buddah.jpg'),
         require('./assets/images/misty-trees.jpg'),
       ]),
       Font.loadAsync({
