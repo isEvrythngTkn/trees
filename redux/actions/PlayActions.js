@@ -6,7 +6,6 @@ import {
   PLAY_AGAIN
 } from './types';
 import { fetchBalance } from './OstActions';
-import store from '../store';
 
 export const userPlays = ({ userToken, uuid, kind }) => {
   return (dispatch) => {

@@ -7,7 +7,6 @@ import {
   REDEEM_FAIL
 } from './types';
 import { fetchBalance } from './OstActions';
-import store from '../store';
 
 export const userRedeems = ({ userToken, uuid, item }) => {
   const kind = item.transaction_kind;
