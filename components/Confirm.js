@@ -1,37 +1,46 @@
 import React from 'react';
 import { Text, View, Modal } from 'react-native';
 import { Button } from 'react-native-elements';
+import Overlay from 'react-native-modal-overlay';
  
 const Confirm = ({ children, visible, onAccept, onDecline }) => {
   const { containerStyle, textStyle, buttonWrapperStyle } = styles;
 
   return (
-    <Modal
+    <Overlay
       visible={visible}
       transparent
-      animationType="slide"
+      animationType="fadeInUp"
       onRequestClose={() => {}}
+      containerStyle={{
+        backgroundColor: 'rgba(0, 0, 0, .6)',
+      }}
+      childrenWrapperStyle={{
+        borderRadius: 8
+      }}
     >
       <View style={containerStyle}>
-        <Text style={textStyle}>{children}</Text>
+        <View>
+          {children}
+        </View>
         <View style={buttonWrapperStyle}>
           <Button 
             containerViewStyle={styles.buttonStyle} 
-            title="No" 
+            title="Cancel" 
             onPress={onDecline} 
-            large
             backgroundColor='#444'
+            icon={{ name: 'cancel', type: 'MaterialIcons' }}
           />
           <Button 
             containerViewStyle={styles.buttonStyle} 
-            title="Yes" 
+            title="Accept" 
             onPress={onAccept} 
-            large
             backgroundColor='#5E9732'
+            icon={{ name: 'check-circle', type: 'MaterialIcons' }}
           />
         </View>
       </View>
-    </Modal>
+    </Overlay>
   );
 };
 
@@ -39,21 +48,16 @@ const styles = {
   containerStyle: {
     backgroundColor: 'rgba(255, 255, 255, .95)',
     position: 'relative',
-    flex: 1,
+    width: 320,
     justifyContent: 'center',
-    alignItems: 'center'
-  },
-  textStyle: {
-    fontSize: 26,
-    textAlign: 'center',
-    lineHeight: 40,
-    marginBottom: 40
+    alignItems: 'flex-end'
   },
   buttonWrapperStyle: {
+    marginTop: 30,
     flexDirection: 'row'
   },
   buttonStyle: {
-    flex: 1
+    marginRight: 0,
   }
 };
 

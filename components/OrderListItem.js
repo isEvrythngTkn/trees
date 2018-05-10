@@ -44,7 +44,7 @@ class OrderListItem extends Component {
       `You picked up this order on ${moment(completed_at).format('ddd, MMM D, YYYY')}` : 'You have not yet picked up this order.';
 
     return (
-      <Card title={`Ordered on ${moment(created).format('MMM D, YYYY')}`} titleStyle={{ fontSize: 12, textAlign: 'left' }}>
+      <Card title={`Ordered on ${moment(created).format('MMM D, YYYY')}`} titleStyle={styles.date}>
         <View>
           <View style={{ flex: 1, flexDirection: 'row' }}>
             <Image 
@@ -80,6 +80,10 @@ class OrderListItem extends Component {
 }
 
 const styles = StyleSheet.create({
+  date: { 
+    fontSize: 14, 
+    textAlign: 'left' 
+  },
   statusWrap: {
     alignItems: 'center',
     paddingTop: 10,

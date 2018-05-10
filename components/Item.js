@@ -7,7 +7,7 @@ import {
   LayoutAnimation,
   StyleSheet
 } from 'react-native';
-import { Card, Button } from 'react-native-elements';
+import { Card, Button, Separator } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Confirm from './Confirm';
 import { userRedeems, fetchBalance } from '../redux/actions';
@@ -82,7 +82,19 @@ class Item extends Component {
             onAccept={this.onAccept.bind(this)}
             onDecline={this.onDecline.bind(this)}
         >
-            Are you sure you want to redeem {price} TREES for {title}?
+          <Text style={{ marginBottom: 30, fontSize: 24 }}>
+            <MyAppText>
+              About to Redeem
+            </MyAppText>
+          </Text>
+          <View>
+            <Text style={styles.textStyle}>
+              <MyAppText>
+                Are you sure you want to redeem <Text style={styles.bold}>{price} TREES</Text> for: 
+                <MyAppTitleText> {title}</MyAppTitleText>
+              </MyAppText>
+            </Text>
+          </View>
         </Confirm>
       </Card>
     );
@@ -92,8 +104,14 @@ class Item extends Component {
 const styles = StyleSheet.create({
   container: {
     marginBottom: 15,
-    //borderTopWidth: .5,
-    //borderTopColor: '#ccc',
+  },
+  bold: {
+    fontWeight: 'bold'
+  },
+  textStyle: {
+    fontSize: 20,
+    marginBottom: 15,
+    lineHeight: 28
   },
   price: {
     fontSize: 18,
