@@ -1,22 +1,31 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import NewHeader from '../components/NewHeader';
+import HomeHeader from '../components/HomeHeader';
 import store from '../redux/store';
 import { PLAY_AGAIN } from '../redux/actions/types';
 
-export const getNavigationOptions = ({ navigation }) => {
+const _sharedNavigationOptions = (navigation, headerType, height, backgroundColor) => {
   const { params } = navigation.state;
   const balance = params ? params.balance : 'fetching';
   const title = params ? params.title : '';
 
+  let headerTitle;
+
+  if (headerType === 'standard') {
+    headerTitle = <NewHeader balance={balance} title={title} navigation={navigation} />;
+  } else {
+    headerTitle = <HomeHeader balance={balance} title={title} navigation={navigation} />;
+  }
+
   return {
-    headerTitle: <NewHeader balance={balance} title={title} navigation={navigation} />,
+    headerTitle: headerTitle,
     headerTintColor: 'white',
     headerStyle: { 
-      height: 72,
+      height: height,
       elevation: 0,       //remove shadow on Android
       shadowOpacity: 0,   //remove shadow on iOS,
-      backgroundColor: '#489174'
+      backgroundColor: backgroundColor
     },
     tabBarOnPress: ({ previousScene, scene, jumpToIndex }) => {
       store.dispatch({ type: PLAY_AGAIN });
@@ -24,3 +33,12 @@ export const getNavigationOptions = ({ navigation }) => {
     }
   }
 };
+
+export const getNavigationOptions = ({ navigation }) => {
+  return _sharedNavigationOptions(navigation, 'standard', 72, '#489174');
+};
+
+export const getHomeNavigationOptions = ({ navigation }) => {
+  return _sharedNavigationOptions(navigation, 'home', 380, null);
+};
+

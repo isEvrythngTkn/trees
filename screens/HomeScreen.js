@@ -9,18 +9,18 @@ import {
 import { connect } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 import { Button, Card } from 'react-native-elements';
-import { MyAppText, MontserratBlack } from '../components/StyledText';
-import { getNavigationOptions } from '../navigation/NavigationOptions';
+import { MyAppText, MyAppTitleText } from '../components/StyledText';
+import { getHomeNavigationOptions } from '../navigation/NavigationOptions';
 
 const primaryActionTextColor = '#333';
 
 class HomeScreen extends React.Component {
-  static navigationOptions = getNavigationOptions;
+  static navigationOptions = getHomeNavigationOptions;
 
   componentDidMount() {
     this.props.navigation.setParams({
      balance: this.props.balance,
-     title: 'Home'
+     title: 'Welcome!'
     });
   }
 
@@ -31,46 +31,26 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.pageStyle}>
-        <View style={{ padding: 20 }}>
-          <ImageBackground 
-            source={require('../assets/images/bg-vector-trees.jpg')}
+        <View style={{ padding: 30 }}>
+          <Text style={{ fontSize: 20 }}>
+            <MyAppTitleText>
+              Order Ahead
+            </MyAppTitleText>
+          </Text>
+          <View style={styles.actionSectionWrapper}>
+            <ImageBackground 
+            source={require('../assets/images/vectorbluemountains.jpg')}
             borderRadius={10}
             style={styles.actionSection}>
-            <Text style={styles.primaryActionText}>
-              <MontserratBlack>
-                Scan and Win!
-              </MontserratBlack>
-            </Text>
-            <Button 
-              title="Play Now!" 
-              backgroundColor={primaryActionTextColor}
-              color='#74d3b3'
-              borderRadius={4}
-              icon={{name: 'check-circle', color: '#74d3b3' }}
-              buttonStyle={{
-                paddingLeft: 40,
-                paddingRight: 40
-              }}
-              onPress={this._goToPlay.bind(this)} />
-          </ImageBackground>
-        
-          <ImageBackground 
-          source={require('../assets/images/misty-trees.jpg')}
-          borderRadius={10}
-          style={styles.actionSection}>
-            <MontserratBlack>
-              <Text style={styles.skip}>
-                Order Ahead
-              </Text>
-            </MontserratBlack>
-            <View style={{ marginTop: 20 }}>
-              <Text style={styles.preorderText}>
-                <MyAppText> 
-                  Order from your phone, then pick up at your store. Pay with TREES.
-                </MyAppText>
-              </Text>
-            </View>
-          </ImageBackground>
+              <View style={{ marginTop: 30 }}>
+                <Text style={styles.preorderText}>
+                  <MyAppText> 
+                    Order from your phone, then pick up at your store. Pay with TREES.
+                  </MyAppText>
+                </Text>
+              </View>
+            </ImageBackground>
+          </View>
         </View>
       </ScrollView>
     );
@@ -82,24 +62,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff'
   },
-  actionSection: {
-    height: 240,
-    padding: 20,
-    paddingTop: 10,
-    paddingBottom: 40,
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    marginBottom: 30,
+  actionSectionWrapper: {
+    height: 150,
+    overflow: 'hidden',
+    borderRadius: 10,
+    marginTop: 20
   },
-  primaryActionText: {
-    fontSize: 30,
-    color: primaryActionTextColor,
+  actionSection: {
+    height: 200,
+    padding: 20,
+    alignItems: 'center',
   },
   preorderText: {
     fontSize: 16,
     lineHeight: 26,
     textAlign: 'center',
-    color: 'white'
+    color: 'white',
   },
   skip: {
     fontSize: 24,

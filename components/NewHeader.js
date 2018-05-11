@@ -4,10 +4,12 @@ import {
   Text,
   View,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  ImageBackground
 } from 'react-native';
+import { Button } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
-import { MyAppTitleText, MyAppText } from './StyledText';
+import { MyAppTitleText, MyAppText, MontserratBlack } from './StyledText';
 import { connect } from 'react-redux';
 import { playAgain } from '../redux/actions/PlayActions';
 
@@ -46,7 +48,6 @@ class NewHeader extends React.Component {
             resizeMode="contain"
           />
         </View>
-        
       </View>
     );
   }
