@@ -70,7 +70,7 @@ export default TabNavigator(
     tabBarPosition: 'bottom',
     animationEnabled: true,
     lazy: false,
-    swipeEnabled: true,
+    swipeEnabled: false,
     tabBarOptions: {
       style: {
         height: 70,
