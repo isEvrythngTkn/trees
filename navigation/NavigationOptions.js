@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import NewHeader from '../components/NewHeader';
 import HomeHeader from '../components/HomeHeader';
 import store from '../redux/store';
@@ -15,7 +15,7 @@ const _sharedNavigationOptions = (navigation, headerType, height, backgroundColo
   if (headerType === 'standard') {
     headerTitle = <NewHeader balance={balance} title={title} navigation={navigation} />;
   } else {
-    headerTitle = <HomeHeader balance={balance} title={title} navigation={navigation} />;
+    headerTitle = <View></View>;
   }
 
   return {
@@ -39,6 +39,6 @@ export const getNavigationOptions = ({ navigation }) => {
 };
 
 export const getHomeNavigationOptions = ({ navigation }) => {
-  return _sharedNavigationOptions(navigation, 'home', 380, null);
+  return _sharedNavigationOptions(navigation, 'home', 0, '#cef5e3');
 };
 

@@ -66,10 +66,10 @@ class NewHeader extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  headerContainerStyle: { 
-    flex: 1, 
-    height: 380, 
-    overflow: 'hidden' 
+  headerContainerStyle: {
+    height: 380,
+    borderRadius: 0,
+    overflow: 'hidden'
   },
   logoStyle: { 
     width: 170, 
