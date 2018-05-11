@@ -8,6 +8,7 @@ import AuthLoadingScreen from '../screens/AuthLoadingScreen'
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 import OrderDetailsScreen from '../screens/OrderDetailsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import OrdersScreen from '../screens/OrdersScreen';
 
 const AppStackNavigator = StackNavigator(
   {
@@ -16,6 +17,9 @@ const AppStackNavigator = StackNavigator(
     },
     OrderDetails: {
       screen: OrderDetailsScreen,
+    },
+    Orders: {
+      screen: OrdersScreen,
     },
     Settings: {
       screen: SettingsScreen

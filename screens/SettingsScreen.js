@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { logoutUser } from '../redux/actions';
 import { getNavigationOptions } from '../navigation/NavigationOptions';
@@ -21,9 +21,27 @@ class SettingsScreen extends React.Component {
   }
 
   render() {
+    const list = [
+      {
+        title: 'Order History',
+        icon: 'list',
+        onPress: () => this.props.navigation.navigate('Orders'),
+      }
+    ];
+
     return (
         <View style={styles.container}>
           <View style={styles.mainSection}>
+            {
+              list.map((item, i) => (
+                <ListItem
+                  key={i}
+                  title={item.title}
+                  leftIcon={{ name: item.icon }}
+                  onPress={() => item.onPress()}
+                />
+              ))
+            }
           </View>
           <View style={styles.footerSection}>
             <Button 
