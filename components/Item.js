@@ -104,6 +104,8 @@ class Item extends Component {
 const styles = StyleSheet.create({
   container: {
     marginBottom: 15,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   bold: {
     fontWeight: 'bold'
