@@ -22,6 +22,7 @@ class PlayScreen extends React.Component {
   }
 
   handleBarCodeRead({ type, data }) {
+    console.log('just read a qr code', data);
     this.props.userPlays({ 
       userToken: this.props.userToken,
       uuid: this.props.ostUUID, 

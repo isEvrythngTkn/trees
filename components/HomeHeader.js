@@ -30,7 +30,7 @@ class NewHeader extends React.Component {
           </View>
           <View style={{ alignItems: 'center' }}>
             <Image
-              source={require('../assets/images/trees_logo_w_words.png')}
+              source={require('../assets/images/trees_logo_w_words_small.png')}
               resizeMode="contain"
               style={styles.logoStyle} />
           </View>
