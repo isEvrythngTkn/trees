@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { Card } from 'react-native-elements';
+import { Card, ListItem, List, Avatar } from 'react-native-elements';
 import moment from 'moment';
 import { getNavigationOptions } from '../navigation/NavigationOptions';
 import { productShots } from '../assets/images';
@@ -31,52 +31,95 @@ class OrderDetailsScreen extends React.Component {
     } = this.props.navigation.state.params;
 
     const orderId = _id ? (
-      <View>
-        <Text style={styles.ids}>
-          <MyAppText>Order id: {_id}</MyAppText>
-        </Text>
-        <View style={styles.spacer} />
-      </View>
+      this.renderDataPoint('Order ID', _id)
     ) : (
       <View />
     );
 
-    const status = completed ? 
-      `You picked up this order on ${moment(completed_at).format('ddd, MMM D, YYYY')}` : 'You have not yet picked up this order.';
+    const status = completed ? `Claimed on ${moment(completed_at).format('ddd, MMM D, YYYY')}` : 'Unclaimed';
 
+    const items = [
+      {
+        title: orderTitle,
+        avatar: productShots[image_key],
+        subtitle: description
+      }
+    ];
     return (
-      <View style={styles.container}>
-        <Card title="Order Details">
-          <View style={styles.dateWrapper}>
-            <MyAppText style={styles.date}>Ordered on {moment(created).format('ddd, MMM D, YYYY')}</MyAppText>
-          </View>
-          <View style={styles.details}>
-            <Image 
-              style={{ width: 100, height: 100 }}
-              resizeMode='cover'
-              source={productShots[image_key]}
+      <View style={styles.orderContainer}>
+        <View style={styles.orderHeader}>
+          <View style={styles.priceWrap}>
+            <Text style={{ fontSize: 60, lineHeight: 72, color: '#333' }}>
+              <MyAppTitleText>
+                {price}
+              </MyAppTitleText>
+            </Text>
+            <Image
+              source={require('../assets/images/tree-with-many-leaves_black.png')}
+              style={styles.icon}
+              resizeMode="contain"
             />
-            <View style={styles.productWrap}>
-              <Text style={styles.orderTitle}>
-                <MyAppTitleText>
-                  {orderTitle}
-                </MyAppTitleText>
-              </Text>
-              <Text style={styles.price}>
-                <MyAppText>{price} TREES</MyAppText>
-              </Text>
-            </View>
           </View>
-          <View style={styles.idsWrapper}>
-            {orderId}
-            <Text style={styles.ids}>
-              <MyAppText>Transaction ID: {transaction_uuid}</MyAppText>
+          <View style={styles.dateWrapper}>
+            <Text style={styles.date}>
+              <MyAppText>Order placed {moment(created).format('ddd, MMM D, YYYY')}</MyAppText>
             </Text>
           </View>
-          <View>
-            <MyAppTitleText>{status}</MyAppTitleText>
-          </View>
-        </Card>
+        </View>
+        <View style={styles.itemsWrap}>
+          <List containerStyle={{ marginTop: 0, borderTopWidth: 0, borderBottomWidth: 0, backgroundColor: '#eee' }}>
+            {
+              items.map((l, i) => (
+                <ListItem
+                  avatar={
+                    <Avatar
+                      rounded
+                      large
+                      source={ l.avatar }
+                    />
+                  }
+                  key={i}
+                  hideChevron
+                  title={l.title}
+                  subtitle={l.subtitle}
+                  containerStyle={{
+                    paddingTop: 10,
+                    paddingBottom: 10,
+                    paddingLeft: 5, 
+                    paddingRight: 10
+                  }}
+                />
+              ))
+            }
+          </List>
+        </View>
+        
+        <View style={styles.dataPointsWrapper}>
+          {this.renderDataPoint('Status', status)}
+          {this.renderDataPoint('Transaction ID', transaction_uuid)}
+          {orderId}
+        </View>
+      </View>
+    );
+  }
+
+  renderDataPoint(label, value) {
+    return (
+      <View style={styles.dataPoint}>
+        <View style={[styles.label]}>
+          <Text style={styles.dataPointLabelText}>
+            <MyAppText>
+              {label}
+            </MyAppText>
+          </Text>
+        </View>
+        <View>
+          <Text style={[styles.dataPointText]}>
+            <MyAppText>
+              {value}
+            </MyAppText>
+          </Text>
+        </View>
       </View>
     );
   }
@@ -89,48 +132,53 @@ const mapStateToProps = state => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  orderContainer: {
     flex: 1,
-    backgroundColor: '#fff',
-    padding: 15
+    backgroundColor: '#fff'
+  },
+  orderHeader: {
+    padding: 30,
+    paddingTop: 50,
+    paddingBottom: 70,
+  },
+  priceWrap: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   dateWrapper: {
     alignItems: 'center',
-    borderBottomWidth: .5,
-    borderBottomColor: '#ccc',
-    paddingBottom: 15,
+    flex: 1,
   },
   date: {
-    fontSize: 12
+    fontSize: 16,
   },
-  details: {
-    paddingBottom: 20,
-    paddingTop: 20,
-    marginBottom: 20,
+  dataPointsWrapper: { 
+    marginTop: 0, 
     borderBottomWidth: .5,
-    borderBottomColor: '#ccc',
-    flexDirection: 'row'
+    borderBottomColor: '#999'
   },
-  price: {
-    fontSize: 14
+  dataPoint: {
+    borderTopWidth: .5, 
+    borderTopColor: '#999',
+    paddingLeft: 15, 
+    paddingRight: 10, 
+    paddingTop: 10, 
+    paddingBottom: 10,
   },
-  orderTitle: {
+  label: { 
+    paddingBottom: 10
+  },
+  dataPointLabelText: {
+    fontSize: 14,
+    color: '#888'
+  },
+  dataPointText: {
     fontSize: 20
   },
-  productWrap: {
-    marginLeft: 15,
-  },
-  idsWrapper: {
-    paddingBottom: 20, 
-    marginBottom: 20,
-    borderBottomWidth: .5,
-    borderBottomColor: '#ccc'
-  },
-  ids: {
-    fontSize: 14,
-  },
-  spacer: {
-    height: 10
+  icon: {
+    width: 60,
+    height: 60,
+    marginLeft: 10
   }
 });
 
