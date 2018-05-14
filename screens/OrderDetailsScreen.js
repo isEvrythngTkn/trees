@@ -27,7 +27,8 @@ class OrderDetailsScreen extends React.Component {
       completed, 
       price, 
       transaction_uuid,
-      completed_at
+      completed_at,
+      successMessage
     } = this.props.navigation.state.params;
 
     const orderId = _id ? (
@@ -45,6 +46,7 @@ class OrderDetailsScreen extends React.Component {
         subtitle: description
       }
     ];
+
     return (
       <View style={styles.orderContainer}>
         <View style={styles.orderHeader}>
@@ -99,8 +101,25 @@ class OrderDetailsScreen extends React.Component {
           {this.renderDataPoint('Transaction ID', transaction_uuid)}
           {orderId}
         </View>
+        {this.renderSuccessMessage(successMessage)}
       </View>
     );
+  }
+
+  renderSuccessMessage(successMessage) {
+    if (successMessage) {
+      return (
+        <View style={styles.successMessageWrap}>
+          <Text style={styles.successMessageText}>
+            <MyAppText>
+              {successMessage}
+            </MyAppText>   
+          </Text>
+        </View>
+      );
+    } else {
+      return <View />
+    }
   }
 
   renderDataPoint(label, value) {
@@ -179,7 +198,25 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     marginLeft: 10
-  }
+  },
+  successMessageWrap: { 
+    padding: 15, 
+    paddingTop: 20,
+    paddingBottom: 20, 
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    //borderRadius: 8, 
+    //borderWidth: 2, 
+    backgroundColor: '#489174', 
+    //margin: 20, 
+    //marginBottom: 0 
+  },
+  successMessageText: { 
+    textAlign: 'center', 
+    fontSize: 20, 
+    color: '#fff' 
+  },
 });
 
 export default connect(mapStateToProps, {})(OrderDetailsScreen);

@@ -35,9 +35,11 @@ const _redeemSuccess = async (dispatch, item, response) => {
     completed: false
   };
   
+  const successMessage = 'Your order was successfully processed. It will be ready for pick up in 15 minutes.';
+
   try {
     await storeOrder(order);
-    NavigationService.navigate('OrderDetails', order);
+    NavigationService.navigate('OrderDetails', { ...order, orderTitle: item.title, successMessage });
     dispatch({ type: REDEEM_SUCCESS, payload: order });
   } catch (err) {
     // @TODO: need better error handling here
