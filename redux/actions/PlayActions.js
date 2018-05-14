@@ -6,11 +6,14 @@ import {
   PLAY_AGAIN
 } from './types';
 import { fetchBalance } from './OstActions';
+import { wins } from '../../constants/TransactionKinds';
 
 export const userPlays = ({ userToken, uuid, kind }) => {
   return (dispatch) => {
     dispatch({ type: USER_PLAYING });
 
+    const index = getRandomArbitrary(0, 3);
+    kind = wins[index];
     //if (Math.random() >= 0.5) {
     userWins(dispatch, uuid, kind);
     //} else {
@@ -18,6 +21,10 @@ export const userPlays = ({ userToken, uuid, kind }) => {
     // }
   };
 };
+
+const getRandomArbitrary = (min, max) => {
+    return Math.floor(Math.random() * max) + min;
+}
 
 const userWins = async (dispatch, uuid, kind) => {
   try {

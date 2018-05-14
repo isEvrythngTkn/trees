@@ -3,20 +3,20 @@
 "title": "Trees Ballcap",
 "description": "Classic logo cap - it's crafted using 100% organic cotton twill for natural, eco-conscious comfort. We've also added an adjustable leather backstrap, so you get the perfect fit every time.",
 "image_key": "hat",
-"transaction_kind": "Redeem10",
-"price": 10
-},
-{"id": 0,
-"title": "Grindhouse Grinder",
-"description": "2.2\" Tiered Herb Grinder features a magnetic top, diamond-shaped teeth, and a pollen chamber w/ sifting screens. Scrape tool included.",
-"image_key": "grinder",
-"transaction_kind": "Redeem50",
-"price": 50
+"transaction_kind": "Redeem60",
+"price": 60
 },
 {"id": 1,
 "title": "Budha Buddah",
 "description": "Buddha Buddah is a specially formulated, 100% fair trade organic, THC-infused topical body cream. 200mg THC/jar. A uniquely formulated topical body cream designed to increase the skin’s ability to attract, hold and distribute moisture to alleviate muscle pain.",
 "image_key": "buddah",
+"transaction_kind": "Redeem75",
+"price": 75
+},
+{"id": 0,
+"title": "Grindhouse Grinder",
+"description": "2.2\" Tiered Herb Grinder features a magnetic top, diamond-shaped teeth, and a pollen chamber w/ sifting screens. Scrape tool included.",
+"image_key": "grinder",
 "transaction_kind": "Redeem100",
 "price": 100
 }
