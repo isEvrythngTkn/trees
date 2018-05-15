@@ -29,7 +29,7 @@ const getRandomArbitrary = (min, max) => {
 const userWins = async (dispatch, uuid, kind) => {
   try {
     const response = await transferToUser(kind, uuid);
-    console.log('response from transfer to user', response);
+    //console.log('response from transfer to user', response);
     // forced delay so it seems like something is happening
     setTimeout(() => {
       dispatch({ type: USER_WIN, payload: kind });  

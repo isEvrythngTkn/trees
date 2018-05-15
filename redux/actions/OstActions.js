@@ -9,7 +9,7 @@ export const fetchBalance = ({ userToken, ostUUID }) => {
   return async (dispatch) => {
     try {
       const balance = await getUserBalance(userToken, ostUUID);
-      console.log('response from fetch Balance', balance);
+      //console.log('response from fetch Balance', balance);
       fetchedBalance(dispatch, balance);
     } catch (err) {
       // @TODO: need better error handling here

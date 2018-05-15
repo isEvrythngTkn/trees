@@ -22,7 +22,7 @@ class PlayScreen extends React.Component {
   }
 
   handleBarCodeRead({ type, data }) {
-    console.log('just read a qr code', data);
+    //console.log('just read a qr code', data);
     this.props.userPlays({ 
       userToken: this.props.userToken,
       uuid: this.props.ostUUID, 
@@ -192,7 +192,7 @@ const mapStateToProps = state => {
   const { amount, playing, won, lost } = state.play;
   const { ostUUID, userToken } = state.auth;
   const { balance } = state.ost;
-  console.log('ostUUID', ostUUID );
+  //console.log('ostUUID', ostUUID );
   return {
     amount,
     playing,

@@ -34,7 +34,7 @@ export const passwordChanged = (text) => {
 };
 
 export const loginUser = ({ email, password }) => {
-  console.log('Login');
+  //console.log('Login');
   return (dispatch) => {
     dispatch({ type: LOGIN_USER });
 
@@ -54,12 +54,12 @@ const loginUserFail = (dispatch) => {
 };
 
 const userCreateSuccess = async (dispatch, user) => {
-  console.log('User Create Success');
+  //console.log('User Create Success');
   // create a new user in OST
   // and store their OST UUID in Firebase
   try {
     const ostUUID = await createUser(user.uid);
-    console.log('about to transfer to user a tenner');
+    console.log('about to transfer to user 25 tokens');
     setTimeout(() => {
       transferToUser(TWENTY_FIVE, ostUUID);
     }, 4000);
@@ -73,7 +73,7 @@ const userCreateSuccess = async (dispatch, user) => {
 };
 
 const loginUserSuccess = async (dispatch, user) => {
-  console.log('loginUserSuccess');
+  //console.log('loginUserSuccess');
 
   // probably need to get the OST UUID right here
   try {

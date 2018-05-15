@@ -88,7 +88,9 @@ class OrderDetailsScreen extends React.Component {
                     paddingTop: 10,
                     paddingBottom: 10,
                     paddingLeft: 5, 
-                    paddingRight: 10
+                    paddingRight: 10,
+                    borderBottomWidth: .25,
+                    borderBottomColor: '#999'
                   }}
                 />
               ))
@@ -206,11 +208,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     left: 0,
-    //borderRadius: 8, 
-    //borderWidth: 2, 
-    backgroundColor: '#489174', 
-    //margin: 20, 
-    //marginBottom: 0 
+    backgroundColor: '#489174',
   },
   successMessageText: { 
     textAlign: 'center', 

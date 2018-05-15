@@ -19,6 +19,20 @@ class NewHeader extends React.Component {
     this.props.playAgain();
   }
 
+  renderSettings() {
+    return (
+      <View style={styles.settings}>
+        <TouchableOpacity onPress={this.onSettingsPress.bind(this)}>
+          <Ionicons
+            name='md-settings'
+            size={28}
+            color='white'
+          />
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   render() {
     return (
       <View style={styles.headerContainerStyle}>
@@ -29,15 +43,7 @@ class NewHeader extends React.Component {
             </Text>
           </MyAppTitleText>
         </View>
-        <View style={styles.settings}>
-          <TouchableOpacity onPress={this.onSettingsPress.bind(this)}>
-            <Ionicons
-              name='md-settings'
-              size={28}
-              color='white'
-            />
-          </TouchableOpacity>
-        </View>
+        {this.renderSettings()}
         <View style={styles.balanceTextContainerStyle}>
           <MyAppText>
             <Text style={styles.balanceTextStyle}>{this.props.balance}</Text>

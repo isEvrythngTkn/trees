@@ -16,7 +16,7 @@ export const userRedeems = ({ userToken, uuid, item }) => {
     try {
       dispatch({ type: REDEEM, payload: item });
       const response = await transferToCompany(kind, uuid);
-      console.log('response from transfer to company', response);
+      //console.log('response from transfer to company', response);
       _redeemSuccess(dispatch, item, response);
     } catch (err) {
       // @TODO: need better error handling here

@@ -35,7 +35,7 @@ const Confirm = ({ children, visible, onAccept, onDecline }) => {
             containerViewStyle={styles.buttonStyle} 
             title="Accept" 
             onPress={onAccept} 
-            backgroundColor='#5E9732'
+            backgroundColor='#489174'
             icon={{ name: 'check-circle', type: 'MaterialIcons' }}
           />
         </View>

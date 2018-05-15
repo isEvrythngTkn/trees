@@ -17,12 +17,12 @@ export const createUserRecordWithUUID = (uuid) => {
 }
 
 export const getUserUUID = (userToken, callback) => {
-  console.log('userToken', userToken);
-    userToken = userToken || auth.currentUser.uid;
-    return database.ref(`/users/${userToken}`)
-      .on('value', snapshot => {
-          callback(snapshot.val().uuid);
-      });
+  //console.log('userToken', userToken);
+  userToken = userToken || auth.currentUser.uid;
+  return database.ref(`/users/${userToken}`)
+    .on('value', snapshot => {
+        callback(snapshot.val().uuid);
+    });
 }
 
 export const storeOrder = (order) => {

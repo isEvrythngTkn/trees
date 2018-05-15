@@ -57,13 +57,7 @@ class HomeScreen extends React.Component {
 
   renderMostRecentOrder() {
     return (
-      <View>
-        <Text style={{ fontSize: 20 }}>
-          <MyAppTitleText>
-            Most Recent Order
-          </MyAppTitleText>
-        </Text>
-      </View>
+      <View />
     );
   }
 

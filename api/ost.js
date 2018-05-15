@@ -22,7 +22,9 @@ export const createUser = async (uid) => {
   // Send data even tho the API docs don't mention it
   // https://help.ost.com/support/discussions/topics/35000004792
   try{
+    console.log('About to create a user', url, requestData);
     const response = await axios.post(url, requestData);
+    console.log('User created. Response: ', response);
     return response.data.data.economy_users[0].uuid;
   } catch (err) {
     console.log(err);
@@ -30,11 +32,15 @@ export const createUser = async (uid) => {
 };
 
 export const transferToUser = async (kind, userUUID) => {
-  return await _transfer(kind, COMPANY_UUID, userUUID);
+  const response = await _transfer(kind, COMPANY_UUID, userUUID);
+  console.log('Response from company to user transaction', response);
+  return response;
 };
 
 export const transferToCompany = async(kind, userUUID) => {
-  return await _transfer(kind, userUUID, COMPANY_UUID);
+  const response = await _transfer(kind, userUUID, COMPANY_UUID);
+  console.log('Response from user to company transaction', response);
+  return response;
 }
 
 const _transfer = async (kind, fromUUID, toUUID) => {
@@ -48,7 +54,7 @@ const _transfer = async (kind, fromUUID, toUUID) => {
   const { url, requestData } = generateRequestUrlAndData(endpoint, inputParams);
 
   try{
-    console.log('About to post a transaction execution', url, requestData);
+    console.log('About to transfer tokens', url, requestData);
     return await axios.post(url, requestData);
   } catch (err) {
     console.log(err);
@@ -58,7 +64,6 @@ const _transfer = async (kind, fromUUID, toUUID) => {
 export const getUserBalance = async (fireBaseUid, OstUuid) => {
   const endpoint = '/users/edit';
   const name = fireBaseUid.substring(0, 20);
-  console.log('name and ostuuid', name, OstUuid);
   const { url, requestData } = generateRequestUrlAndData(endpoint, { uuid: OstUuid, name });
 
   try{
