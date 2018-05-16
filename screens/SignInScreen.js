@@ -8,6 +8,7 @@ import {
   StyleSheet,
   ImageBackground,
   View,
+  Image,
   Text,
   TouchableOpacity,
 } from 'react-native';
@@ -15,7 +16,7 @@ import { connect } from 'react-redux';
 import { Card, FormLabel, FormInput, Button } from 'react-native-elements';
 import { StackNavigator, SwitchNavigator } from 'react-navigation'; // Version can be specified in package.json
 import { emailChanged, passwordChanged, loginUser } from '../redux/actions';
-import { MyAppText } from '../components/StyledText';
+import { MyAppText, MyAppTitleText } from '../components/StyledText';
 
 class SignInScreen extends React.Component {
   state = {
@@ -63,12 +64,12 @@ class SignInScreen extends React.Component {
   renderEmailInput() {
     return (
       <View>
-        <FormLabel>Email</FormLabel>
         <FormInput
-          placeholder="jane@example.com"
+          placeholder="email"
           keyboardType='email-address'
           onChangeText={this.onEmailChange.bind(this)}
           value={this.props.email}
+          containerStyle={styles.input}
         />
       </View>
     );
@@ -77,11 +78,11 @@ class SignInScreen extends React.Component {
   renderPasswordInput() {
     return (
       <View>
-        <FormLabel>Password</FormLabel>
         <FormInput
           placeholder="password"
           onChangeText={this.onPasswordChange.bind(this)}
           value={this.props.password}
+          containerStyle={styles.input}
           secureTextEntry
         />
       </View>
@@ -94,6 +95,7 @@ class SignInScreen extends React.Component {
         title={title} 
         backgroundColor="#74d3b3"
         borderRadius={5}
+        containerViewStyle={{ width: 300 }}
         loading={this.state.loading}
         onPress={onPress} />
     );
@@ -101,85 +103,131 @@ class SignInScreen extends React.Component {
 
   renderSignup() {
     return (
-      <Card title="Sign up for Trees App" containerStyle={styles.card}>
-        <View style={styles.form}>
-          <FormLabel>Name</FormLabel>
+      <View style={{ alignItems: 'center', width: 300 }}>
+        <Text style={{ fontSize: 16 }}>
+          <MyAppText>
+            SIGN UP WITH YOUR EMAIL
+          </MyAppText>
+        </Text>
+        <View style={[styles.form, { height: 180 }]}>
           <FormInput
             placeholder="name"
+            containerStyle={styles.input}
           />
           {this.renderEmailInput()}
           {this.renderPasswordInput()}
         </View>
-        {this.renderButton('Sign up!', this.onSignInPress.bind(this))}
-        <View style={{ marginTop: 30, alignItems: 'center' }}>
-          <Text style={{ marginRight: 10, fontSize: 18 }}>
-            <MyAppText>
-              Already have an account?
-            </MyAppText>
-          </Text>
-          <TouchableOpacity onPress={this.showLogin.bind(this)}>  
-            <Text style={{ fontSize: 18, color: '#2A4F6E' }}>
-              <MyAppText>
-                Sign In
-              </MyAppText>
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </Card>
+        {this.renderButton('SIGN UP', this.onSignInPress.bind(this))}
+        {this.renderOtherScreenLink('Already have an account?', 'Sign in', this.showLogin.bind(this))}
+      </View>
     );
   }
 
   renderSignin() {
     return (
-      <Card title="Login to the Trees App" containerStyle={styles.card}>
-        <View style={styles.form}>
+      <View style={{ alignItems: 'center', width: 300 }}>
+        <Text style={{ fontSize: 16 }}>
+          <MyAppText>
+            SIGN IN
+          </MyAppText>
+        </Text>
+        <View style={[styles.form, { height: 120 }]}>
           {this.renderEmailInput()}
           {this.renderPasswordInput()}
         </View>
-        {this.renderButton('Sign in!', this.onSignInPress.bind(this))}
-        <View style={{ marginTop: 30, alignItems: 'center' }}>
-          <Text style={{ marginRight: 10, fontSize: 18 }}>
+        {this.renderButton('SIGN IN', this.onSignInPress.bind(this))}
+        {this.renderOtherScreenLink('Not yet a user?', 'Sign up', this.showSignUp.bind(this))}
+      </View>
+    );
+  }
+
+  renderOtherScreenLink(question, action, onPress) {
+    return (
+      <View style={styles.otherScreenOption}>
+        <Text style={styles.otherScreenQuestion}>
+          <MyAppText>
+            {question}
+          </MyAppText>
+        </Text>
+        <TouchableOpacity onPress={onPress}>  
+          <Text style={styles.changeScreenText}>
             <MyAppText>
-              Not yet a user?
+              {action}
             </MyAppText>
           </Text>
-          <TouchableOpacity onPress={this.showSignUp.bind(this)}>  
-            <Text style={{ fontSize: 18, color: '#2A4F6E' }}>
-              <MyAppText>
-                Sign Up
-              </MyAppText>
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </Card>
+        </TouchableOpacity>
+      </View>
     );
   }
 
   render() {
     const content = this.state.signup ? this.renderSignup() : this.renderSignin();
+
     return (
-      <ImageBackground 
-          source={require('../assets/images/signin.jpg')}
-          style={styles.container}
-          resizeMode="cover"
-          >
-          {content}
-      </ImageBackground>
+      <View style={styles.container}>
+        <Image
+          source={require('../assets/images/trees_logo_w_words_small.png')}
+          style={styles.logo}
+          resizeMode="contain" />
+          <View style={styles.formWrapper}>
+            {content}
+          </View>
+      </View>
     );
   }
+
+  // render() {
+  //   
+  //   return (
+  //     <ImageBackground 
+  //         source={require('../assets/images/signin.jpg')}
+  //         style={styles.container}
+  //         resizeMode="cover"
+  //         >
+  //         {content}
+  //     </ImageBackground>
+  //   );
+  // }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    justifyContent: 'center'
+    paddingTop: 80,
+    paddingLeft: 50, 
+    paddingRight: 50,
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
+  logo: {
+    width: 180,
+    height: 180,
+  },
+  formWrapper: {
+    marginTop: 30
   },
   form: {
-    paddingBottom: 15
+    width: 300,
+    justifyContent: 'space-between',
+    marginTop: 30,
+    marginBottom: 30,
   },
-  card: {
-    paddingBottom: 25
+  input: {
+    marginLeft: 0, 
+    marginRight: 0
+  },
+  otherScreenOption: { 
+    marginTop: 45, 
+    alignItems: 'center' 
+  },
+  otherScreenQuestion: { 
+    marginRight: 10, 
+    fontSize: 18, 
+    fontStyle: 'italic' 
+  },
+  changeScreenText: { 
+    fontSize: 18, 
+    color: '#2A4F6E' 
   }
 });
 
