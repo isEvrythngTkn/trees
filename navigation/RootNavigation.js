@@ -1,6 +1,6 @@
 import { Notifications } from 'expo';
 import React from 'react';
-import { StackNavigator, SwitchNavigator } from 'react-navigation';
+import { StackNavigator, SwitchNavigator, DrawerNavigator } from 'react-navigation';
 import NavigationService from './NavigationService';
 import MainTabNavigator from './MainTabNavigator';
 import SignInScreen from '../screens/SignInScreen';
@@ -34,11 +34,23 @@ const AppStackNavigator = StackNavigator(
   }
 );
 
+const AppDrawerNavigator = DrawerNavigator({
+  Main: {
+    screen: AppStackNavigator,
+  },
+  DrawerItem1: {
+      screen: MainTabNavigator,
+      navigationOptions: {
+          drawerLabel: "Drawer Item 1"
+      },
+  }
+});
+
 const AuthStackNavigator = StackNavigator({ SignIn: SignInScreen });
 
 const RootStackNavigator = SwitchNavigator({
   AuthLoading: AuthLoadingScreen,
-  App: AppStackNavigator,
+  App: AppDrawerNavigator,
   Auth: AuthStackNavigator
 }, {
   initialRouteName: 'AuthLoading',
