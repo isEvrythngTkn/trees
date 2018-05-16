@@ -18,6 +18,7 @@ import {
   getUserUUID
 } from '../../api/firebase';
 import { TWENTY_FIVE, transactionKinds } from '../../constants/TransactionKinds';
+import NavigationService from '../../navigation/NavigationService';
 
 export const emailChanged = (text) => {
   return {
@@ -88,6 +89,7 @@ const loginUserSuccess = async (dispatch, user) => {
 };
 
 export const logoutUser = () => {
+  NavigationService.navigate('Auth');
   return {
     type: LOGOUT_USER,
     payload: null

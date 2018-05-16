@@ -33,9 +33,24 @@ class NewHeader extends React.Component {
     );
   }
 
+  renderHamburger() {
+    return (
+      <View style={styles.hamburger}>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate("DrawerOpen")}>
+          <Ionicons
+            name='md-menu'
+            size={36}
+            color='white'
+          />
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   render() {
     return (
       <View style={styles.headerContainerStyle}>
+        {this.renderHamburger()}
         <View style={styles.titleTextContainerStyle}>
           <MyAppTitleText>
             <Text style={styles.titleTextStyle}>
@@ -43,7 +58,6 @@ class NewHeader extends React.Component {
             </Text>
           </MyAppTitleText>
         </View>
-        {this.renderSettings()}
         <View style={styles.balanceTextContainerStyle}>
           <MyAppText>
             <Text style={styles.balanceTextStyle}>{this.props.balance}</Text>
@@ -67,8 +81,11 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
   },
+  hamburger: {
+    flex: 1
+  },
   titleTextContainerStyle: {
-    flex: 3
+    flex: 5
   },
   titleTextStyle: {
     fontSize: 28,

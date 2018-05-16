@@ -1,6 +1,8 @@
 import { Notifications } from 'expo';
 import React from 'react';
-import { StackNavigator, SwitchNavigator, DrawerNavigator } from 'react-navigation';
+import { View, SafeAreaView, Button } from 'react-native';
+import { StackNavigator, SwitchNavigator, DrawerNavigator, DrawerItems } from 'react-navigation';
+import Icon from "react-native-vector-icons/FontAwesome";
 import NavigationService from './NavigationService';
 import MainTabNavigator from './MainTabNavigator';
 import SignInScreen from '../screens/SignInScreen';
@@ -9,6 +11,7 @@ import registerForPushNotificationsAsync from '../api/registerForPushNotificatio
 import OrderDetailsScreen from '../screens/OrderDetailsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import OrdersScreen from '../screens/OrdersScreen';
+import Drawer from '../components/Drawer';
 
 const AppStackNavigator = StackNavigator(
   {
@@ -17,12 +20,6 @@ const AppStackNavigator = StackNavigator(
     },
     OrderDetails: {
       screen: OrderDetailsScreen,
-    },
-    Orders: {
-      screen: OrdersScreen,
-    },
-    Settings: {
-      screen: SettingsScreen
     }
   },
   {
@@ -30,6 +27,7 @@ const AppStackNavigator = StackNavigator(
       headerTitleStyle: {
         fontWeight: 'normal',
       },
+      drawerLabel: () => null
     }),
   }
 );
@@ -38,11 +36,33 @@ const AppDrawerNavigator = DrawerNavigator({
   Main: {
     screen: AppStackNavigator,
   },
-  DrawerItem1: {
-      screen: MainTabNavigator,
-      navigationOptions: {
-          drawerLabel: "Drawer Item 1"
-      },
+  Orders: {
+    screen: OrdersScreen,
+    navigationOptions: {
+      drawerLabel: "Order History",
+      drawerIcon: ({ tintColor }) => <Icon name="th-list" color={tintColor} size={24} />
+    },
+  },
+  // Settings: {
+  //   screen: SettingsScreen,
+  //   navigationOptions: {
+  //     drawerIcon: ({ tintColor }) => <Icon name="cog" color={tintColor} size={24} />
+  //   },
+  // },
+}, {
+  contentComponent:(props) => (
+    <Drawer parentProps={props} />
+  ),
+  contentOptions: {
+    inactiveTintColor: 'white',
+    itemStyle: {
+      borderBottomWidth: .5,
+      borderBottomColor: '#555',
+    },
+    labelStyle: {
+      fontSize: 20,
+      fontWeight: 'normal'
+    }
   }
 });
 
