@@ -61,6 +61,7 @@ class SignInScreen extends React.Component {
     this.setState({ signup: false });
   }
 
+  // @todo these should all be components, not functions
   renderEmailInput() {
     return (
       <View>
@@ -101,14 +102,20 @@ class SignInScreen extends React.Component {
     );
   }
 
+  renderTitle(title) {
+    return (
+      <Text style={{ fontSize: 16 }}>
+        <MyAppText>
+          {title}
+        </MyAppText>
+      </Text>
+    );
+  }  
+
   renderSignup() {
     return (
-      <View style={{ alignItems: 'center', width: 300 }}>
-        <Text style={{ fontSize: 16 }}>
-          <MyAppText>
-            SIGN UP WITH YOUR EMAIL
-          </MyAppText>
-        </Text>
+      <View style={styles.sectionWrap}>
+        {this.renderTitle('SIGN UP WITH YOUR EMAIL')}
         <View style={[styles.form, { height: 180 }]}>
           <FormInput
             placeholder="name"
@@ -125,18 +132,14 @@ class SignInScreen extends React.Component {
 
   renderSignin() {
     return (
-      <View style={{ alignItems: 'center', width: 300 }}>
-        <Text style={{ fontSize: 16 }}>
-          <MyAppText>
-            SIGN IN
-          </MyAppText>
-        </Text>
+      <View style={styles.sectionWrap}>
+        {this.renderTitle('SIGN IN')}
         <View style={[styles.form, { height: 120 }]}>
           {this.renderEmailInput()}
           {this.renderPasswordInput()}
         </View>
         {this.renderButton('SIGN IN', this.onSignInPress.bind(this))}
-        {this.renderOtherScreenLink('Not yet a user?', 'Sign up', this.showSignUp.bind(this))}
+        {this.renderOtherScreenLink("Haven't signed up?", 'Sign up', this.showSignUp.bind(this))}
       </View>
     );
   }
@@ -202,6 +205,10 @@ const styles = StyleSheet.create({
   logo: {
     width: 180,
     height: 180,
+  },
+  sectionWrap: {
+    alignItems: 'center',
+    width: 300,
   },
   formWrapper: {
     marginTop: 30
