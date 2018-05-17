@@ -31,26 +31,15 @@ class HomeScreen extends React.Component {
 
   renderOrderAhead() {
     return (
-      <View>
+      <View style={styles.orderAhead}>
         <Text style={{ fontSize: 20 }}>
           <MyAppTitleText>
             Order Ahead
           </MyAppTitleText>
         </Text>
-        <View style={styles.actionSectionWrapper}>
-          <ImageBackground 
-          source={require('../assets/images/vectorbluemountains.jpg')}
-          borderRadius={10}
-          style={styles.actionSection}>
-            <View style={{ marginTop: 30 }}>
-              <Text style={styles.preorderText}>
-                <MyAppText> 
-                  Order from your phone, then pick up at your store. Pay with TREES.
-                </MyAppText>
-              </Text>
-            </View>
-          </ImageBackground>
-        </View>
+        <Text style={{ fontSize: 16, lineHeight: 26 }}>
+          Order from your phone, then pick up at your store. Pay with TREES.
+        </Text>
       </View>
     )
   }
@@ -61,17 +50,26 @@ class HomeScreen extends React.Component {
     );
   }
 
+  renderPromotion() {
+    return (
+      <View style={styles.promo}>
+        <Text style={{ fontSize: 20, color: 'white' }}>
+          <MyAppTitleText>
+            Earn Bonus TREES!
+          </MyAppTitleText>
+        </Text>
+        <Text style={{ fontSize: 16, lineHeight: 26, color: 'white' }}>Spend $100 or more at Trees before 3:00PM today and receive an extra 25 TREES!</Text>
+      </View>
+    );
+  }
+
   render() {
     return (
-      <ScrollView style={styles.pageStyle}>
+      <View style={styles.pageStyle}>
         <HomeHeader balance={this.props.balance} title='Welcome!' navigation={this.props.navigation} />
-        <View style={{ padding: 30 }}>
-          <View style={{ marginBottom: 25 }}>
-            {this.renderOrderAhead()}
-          </View>
-          {this.renderMostRecentOrder()}
-        </View>
-      </ScrollView>
+        {this.renderOrderAhead()}
+        {this.renderPromotion()}
+      </View>
     );
   }
 }
@@ -79,7 +77,8 @@ class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   pageStyle: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: 'white',
+    position: 'relative'
   },
   actionSectionWrapper: {
     height: 150,
@@ -97,6 +96,23 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     textAlign: 'center',
     color: 'white',
+  },
+  orderAhead: {  
+    flex: 2, 
+    padding: 30, 
+    paddingTop: 20, 
+    paddingBottom: 20, 
+    justifyContent: 'center' 
+  },
+  promo: { 
+    flex: 2,
+    padding: 30,
+    paddingTop: 20,
+    paddingBottom: 20,
+    borderColor: '#ccc', 
+    borderBottomWidth: .5, 
+    backgroundColor: '#444',
+    justifyContent: 'center',
   },
   skip: {
     fontSize: 24,

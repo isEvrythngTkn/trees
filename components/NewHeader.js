@@ -21,7 +21,7 @@ class NewHeader extends React.Component {
   }
 
   renderHamburger() {
-    console.log('routename', this.props.navigation.state.routeName);
+    //console.log('routename', this.props.navigation.state.routeName);
     if (_.indexOf(['OrderDetails', 'Orders'], this.props.navigation.state.routeName) < 0) {
       return (
         <View style={styles.hamburger}>

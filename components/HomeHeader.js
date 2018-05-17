@@ -47,11 +47,8 @@ class NewHeader extends React.Component {
       <View style={styles.headerContainerStyle}>
         <ImageBackground 
           source={require('../assets/images/bg-vector-trees.jpg')}
-          style={{ flex: 1, height: 500, paddingTop: 5, paddingRight: 5, alignItems: 'center' }}>
-          <Image 
-            source={require('../assets/images/logo-icon.png')}
-            style={styles.logoStyle}
-            resizeMode="contain" />
+          style={{ flex: 1, height: 500, paddingTop: 5, paddingRight: 5, alignItems: 'center', justifyContent: 'center' }}>
+
           {this.renderAction()}
         </ImageBackground>
       </View>
@@ -61,17 +58,11 @@ class NewHeader extends React.Component {
 
 const styles = StyleSheet.create({
   headerContainerStyle: {
-    height: 340,
+    flex: 5,
     borderRadius: 0,
-    overflow: 'hidden'
-  },
-  logoStyle: { 
-    width: 80, 
-    height: 80,
-    marginTop: 20
+    overflow: 'hidden',
   },
   textContainer: { 
-    marginTop: 50, 
     flexDirection: 'row', 
     paddingLeft: 30, 
     paddingRight: 30 
