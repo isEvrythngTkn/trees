@@ -16,12 +16,12 @@ class NewHeader extends React.Component {
     return (
       <View style={styles.textContainer}>
         <View style={{ flex: 1, alignItems: 'center' }}>
-          <Text style={{ fontSize: 16, color: '#364035' }}>
+          <Text style={{ fontSize: 20, color: '#364035' }}>
             <MyAppTitleText>
               Recently made a purchase?
             </MyAppTitleText>
           </Text>
-          <Text style={{ fontSize: 36, color: '#364035' }}>  
+          <Text style={{ fontSize: 42, color: '#364035' }}>  
             <MontserratBlack>
               Scan and Play
             </MontserratBlack>
@@ -30,7 +30,7 @@ class NewHeader extends React.Component {
             title="Play Now!" 
             backgroundColor='#364035'
             color='#74d3b3'
-            borderRadius={10}
+            borderRadius={5}
             containerViewStyle={{
               marginLeft: 0,
               marginTop: 10
@@ -66,15 +66,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row', 
     paddingLeft: 30, 
     paddingRight: 30 
-  },
-  balanceTextContainerStyle: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
-  homeBalanceTextStyle: {
-    color: 'black',
-    fontSize: 18,
-    lineHeight: 30
   },
   icon: {
     width: 24,
