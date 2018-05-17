@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import {
   StyleSheet,
@@ -20,17 +21,20 @@ class NewHeader extends React.Component {
   }
 
   renderHamburger() {
-    return (
-      <View style={styles.hamburger}>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate("DrawerOpen")}>
-          <Ionicons
-            name='md-menu'
-            size={36}
-            color={this.props.tintColor}
-          />
-        </TouchableOpacity>
-      </View>
-    );
+    console.log('routename', this.props.navigation.state.routeName);
+    if (_.indexOf(['OrderDetails', 'Orders'], this.props.navigation.state.routeName) < 0) {
+      return (
+        <View style={styles.hamburger}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate("DrawerOpen")}>
+            <Ionicons
+              name='md-menu'
+              size={36}
+              color={this.props.tintColor}
+            />
+          </TouchableOpacity>
+        </View>
+      );
+    }
   }
 
   renderBalance() {

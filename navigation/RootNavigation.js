@@ -20,6 +20,9 @@ const AppStackNavigator = StackNavigator(
     },
     OrderDetails: {
       screen: OrderDetailsScreen,
+    },
+    Orders: {
+      screen: OrdersScreen
     }
   },
   {

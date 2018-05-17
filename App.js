@@ -49,16 +49,14 @@ export default class App extends React.Component {
         require('./assets/images/hat.jpg'),
         require('./assets/images/grinder.jpg'),
         require('./assets/images/buddah.jpg'),
+        require('./assets/images/island_grown.png'),
       ]),
       Font.loadAsync({
         // This is the font that we are using for our tab bar
         ...Ionicons.font,
         // We include SpaceMono because we use it in HomeScreen.js. Feel free
         // to remove this if you are not using it in your app
-        'Montserrat-Medium': require('./assets/fonts/Montserrat-Medium.ttf'),
         'OpenSans-ExtraBold': require('./assets/fonts/OpenSans-ExtraBold.ttf'),
-        'Montserrat-Bold': require('./assets/fonts/Montserrat-Bold.ttf'),
-        'Montserrat-SemiBold': require('./assets/fonts/Montserrat-SemiBold.ttf'),
         'OpenSans-Regular': require('./assets/fonts/OpenSans-Regular.ttf'),
         'Teko-Medium': require('./assets/fonts/Teko-Medium.ttf'),
         'Teko-Regular': require('./assets/fonts/Teko-Regular.ttf'),

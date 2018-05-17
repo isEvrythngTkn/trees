@@ -40,7 +40,6 @@ export const getNavigationOptions = ({ navigation }) => {
 };
 
 export const getHomeNavigationOptions = ({ navigation }) => {
-  // return _sharedNavigationOptions(navigation, 'home', 0, '#cef5e3');
   return _sharedNavigationOptions(navigation, 'standard', 72, '#cef5e3', 'black', true);
 };
 
