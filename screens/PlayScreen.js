@@ -1,17 +1,23 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { Button, Card } from 'react-native-elements';
+import { FontAwesome } from '@expo/vector-icons';
 import QrCodeReader from '../components/QrCodeReader';
 import Win from '../components/Win';
 import Lose from '../components/Lose';
 import Playing from '../components/Playing';
+import HelpModal from '../components/HelpModal';
 import { userPlays, userWins, userLoses, playAgain } from '../redux/actions';
 import { getNavigationOptions } from '../navigation/NavigationOptions';
 import { ContainerStyle } from '../components/styles';
 import { MyAppText, MontserratBlack } from '../components/StyledText';
 
 class PlayScreen extends React.Component {
+  state = {
+    helpVisible: false
+  }
+
   static navigationOptions = getNavigationOptions;
 
   componentDidMount() {
@@ -104,6 +110,10 @@ class PlayScreen extends React.Component {
     );
   }
 
+  hideModal() {
+    this.setState({ helpVisible: false });
+  }
+
   renderPlay() {
     return (
       <View style={{ flex: 1 }}>
@@ -116,6 +126,18 @@ class PlayScreen extends React.Component {
               Scan a QR code to play
             </Text>
           </MyAppText>
+          <TouchableOpacity style={styles.helpIcon} onPress={() => { this.setState({ helpVisible: true })}}>
+            <FontAwesome name="question-circle" size={24} color="#333" />
+          </TouchableOpacity>
+          <HelpModal 
+            visible={this.state.helpVisible} 
+            title='Scan to Play' 
+            close={this.hideModal.bind(this)}>
+            <MyAppText>
+              When you make a purchase at Trees Dispensary you'll receive a receipt with a QR code on it.
+              That QR code is your chance to win TREES! Scan it to find out if you've won TREE tokens!
+            </MyAppText>
+          </HelpModal>
         </View>
       </View>
     );
@@ -149,10 +171,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff', 
     alignSelf: 'stretch',
     zIndex: 2,
-    flex: 1
+    flex: 1,
+    flexDirection: 'row'
   },
   instructionsText: {
     fontSize: 18,
+  },
+  helpIcon: {
+    marginLeft: 10
   },
   scanner: {
     flex: 4,

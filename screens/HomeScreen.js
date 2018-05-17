@@ -34,11 +34,11 @@ class HomeScreen extends React.Component {
       <View style={styles.orderAhead}>
         <Text style={{ fontSize: 20 }}>
           <MyAppTitleText>
-            Order Ahead
+            Coming Soon: Order Ahead
           </MyAppTitleText>
         </Text>
         <Text style={{ fontSize: 16, lineHeight: 26 }}>
-          Order from your phone, then pick up at your store. Pay with TREES.
+          Skip the line! Order from your phone, pay with TREES, then pick up at your store.
         </Text>
       </View>
     )
