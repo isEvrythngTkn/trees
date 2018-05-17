@@ -54,7 +54,7 @@ class Item extends Component {
 
         <View style={styles.container}>
           <MyAppTitleText>
-            <Text style={{ fontSize: 20 }}>
+            <Text style={{ fontSize: 24 }}>
               {title}
             </Text>
           </MyAppTitleText>
@@ -72,7 +72,7 @@ class Item extends Component {
         <Button 
           title="Order" 
           onPress={() => this.setState({ showModal: !this.state.showModal })}
-          containerViewStyle={{ width: '100%', marginLeft: 0 }}
+          containerViewStyle={{ marginBottom: 15 }}
           backgroundColor='#496C89'
           icon={{name: 'add-circle', color: '#74d3b3' }}
           />

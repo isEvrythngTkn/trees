@@ -104,7 +104,8 @@ const styles = StyleSheet.create({
   },
   titleTextStyle: {
     fontSize: 40,
-    lineHeight: 72, 
+    lineHeight: 62,
+    marginTop: 8, 
     color: 'white',
     letterSpacing: 15
   },
