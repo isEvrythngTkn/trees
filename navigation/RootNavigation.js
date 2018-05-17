@@ -43,12 +43,6 @@ const AppDrawerNavigator = DrawerNavigator({
       drawerIcon: ({ tintColor }) => <Icon name="th-list" color={tintColor} size={24} />
     },
   },
-  // Settings: {
-  //   screen: SettingsScreen,
-  //   navigationOptions: {
-  //     drawerIcon: ({ tintColor }) => <Icon name="cog" color={tintColor} size={24} />
-  //   },
-  // },
 }, {
   contentComponent:(props) => (
     <Drawer parentProps={props} />

@@ -9,6 +9,7 @@ import HomeScreen from '../screens/HomeScreen';
 import PlayScreen from '../screens/PlayScreen';
 import RedeemScreen from '../screens/RedeemScreen';
 import OrdersScreen from '../screens/OrdersScreen';
+import { MyAppTitleText } from '../components/StyledText';
 
 export default TabNavigator(
   {
@@ -60,7 +61,9 @@ export default TabNavigator(
         return (
           <View>
             <Text style={{ color, textAlign: 'center' }}>
-              {routeName}
+              <MyAppTitleText>
+                {routeName}
+              </MyAppTitleText>
             </Text>
           </View>
         )

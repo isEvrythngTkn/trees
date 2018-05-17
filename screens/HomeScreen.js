@@ -21,7 +21,7 @@ class HomeScreen extends React.Component {
   componentDidMount() {
     this.props.navigation.setParams({
      balance: this.props.balance,
-     title: 'Welcome!'
+     title: 'TREES'
     });
   }
 

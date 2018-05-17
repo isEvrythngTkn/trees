@@ -12,53 +12,44 @@ import { connect } from 'react-redux';
 import { playAgain } from '../redux/actions/PlayActions';
 
 class NewHeader extends React.Component {
+  renderAction() {
+    return (
+      <View style={styles.textContainer}>
+        <View style={{ flex: 1, alignItems: 'center' }}>
+          <Text style={{ fontSize: 16, color: '#364035' }}>
+            <MyAppTitleText>
+              Recently made a purchase?
+            </MyAppTitleText>
+          </Text>
+          <Text style={{ fontSize: 36, color: '#364035' }}>  
+            <MontserratBlack>
+              Scan and Play
+            </MontserratBlack>
+          </Text>
+          <Button 
+            title="Play Now!" 
+            backgroundColor='#364035'
+            color='#74d3b3'
+            borderRadius={10}
+            containerViewStyle={{
+              marginLeft: 0,
+              marginTop: 10
+            }}
+            icon={{name: 'check-circle', color: '#74d3b3' }}
+            onPress={() => {this.props.navigation.navigate('Play')}} />
+        </View>
+      </View>
+    );
+  }
+
   render() {
     return (
       <View style={styles.headerContainerStyle}>
         <ImageBackground 
           source={require('../assets/images/bg-vector-trees.jpg')}
           style={{ flex: 1, height: 500, paddingTop: 5, paddingRight: 5 }}>
-          <View style={styles.balanceTextContainerStyle}>
-            <MyAppText>
-              <Text style={styles.homeBalanceTextStyle}>{this.props.balance}</Text>
-            </MyAppText>
-            <Image
-              source={require('../assets/images/tree-with-many-leaves_black.png')}
-              style={styles.icon}
-              resizeMode="contain"
-            />
-          </View>
-          <View style={{ alignItems: 'center' }}>
-            <Image
-              source={require('../assets/images/trees_logo_w_words_small.png')}
-              resizeMode="contain"
-              style={styles.logoStyle} />
-          </View>
-          <View style={styles.textContainer}>
-            <View style={{ flex: 1, alignItems: 'center' }}>
-              <Text style={{ fontSize: 16, color: '#364035' }}>
-                <MyAppTitleText>
-                  Recently made a purchase?
-                </MyAppTitleText>
-              </Text>
-              <Text style={{ fontSize: 36, color: '#364035' }}>  
-                <MontserratBlack>
-                  Scan and Play
-                </MontserratBlack>
-              </Text>
-              <Button 
-                title="Play Now!" 
-                backgroundColor='#364035'
-                color='#74d3b3'
-                borderRadius={10}
-                containerViewStyle={{
-                  marginLeft: 0,
-                  marginTop: 10
-                }}
-                icon={{name: 'check-circle', color: '#74d3b3' }}
-                onPress={() => {this.props.navigation.navigate('Play')}} />
-            </View>
-          </View>
+          
+          {this.renderAction()}
         </ImageBackground>
       </View>
     )
@@ -67,17 +58,17 @@ class NewHeader extends React.Component {
 
 const styles = StyleSheet.create({
   headerContainerStyle: {
-    height: 380,
+    height: 240,
     borderRadius: 0,
     overflow: 'hidden'
   },
   logoStyle: { 
     width: 170, 
     height: 117, 
-    marginTop: -15 
+    marginTop: -5
   },
   textContainer: { 
-    marginTop: 70, 
+    marginTop: 40, 
     flexDirection: 'row', 
     paddingLeft: 30, 
     paddingRight: 30 

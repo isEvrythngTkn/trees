@@ -19,20 +19,6 @@ class NewHeader extends React.Component {
     this.props.playAgain();
   }
 
-  renderSettings() {
-    return (
-      <View style={styles.settings}>
-        <TouchableOpacity onPress={this.onSettingsPress.bind(this)}>
-          <Ionicons
-            name='md-settings'
-            size={28}
-            color='white'
-          />
-        </TouchableOpacity>
-      </View>
-    );
-  }
-
   renderHamburger() {
     return (
       <View style={styles.hamburger}>
@@ -40,43 +26,71 @@ class NewHeader extends React.Component {
           <Ionicons
             name='md-menu'
             size={36}
-            color='white'
+            color={this.props.tintColor}
           />
         </TouchableOpacity>
       </View>
     );
   }
 
+  renderBalance() {
+    const iconSource = this.props.tintColor === 'black' ? 
+      require('../assets/images/tree-with-many-leaves_black.png') : require('../assets/images/icon-tree3.png');
+
+    return (
+      <View style={styles.balanceTextContainerStyle}>
+        <MyAppText>
+          <Text style={[styles.balanceTextStyle, { color: this.props.tintColor }]}>{this.props.balance}</Text>
+        </MyAppText>
+        <Image
+          source={iconSource}
+          style={styles.icon}
+          resizeMode="contain"
+        />
+      </View>
+    );
+  }
+
+  renderWordMark() {
+    return (
+      <Image
+        source={require('../assets/images/trees_wordmark.png')}
+        style={styles.wordmark}
+        resizeMode="contain" />
+    );
+  }
+
+  renderStandardTitle() {
+    return (
+      <View style={styles.titleTextContainerStyle}>
+        <Text style={[styles.titleTextStyle, { color: this.props.tintColor}]}>
+          <MyAppTitleText>
+            {this.props.title}
+          </MyAppTitleText>
+        </Text>
+      </View>
+    );
+  }
+
   render() {
+    //const title = this.props.wordmark ? this.renderWordMark() : this.renderStandardTitle();
     return (
       <View style={styles.headerContainerStyle}>
         {this.renderHamburger()}
-        <View style={styles.titleTextContainerStyle}>
-          <MyAppTitleText>
-            <Text style={styles.titleTextStyle}>
-              {this.props.title}
-            </Text>
-          </MyAppTitleText>
-        </View>
-        <View style={styles.balanceTextContainerStyle}>
-          <MyAppText>
-            <Text style={styles.balanceTextStyle}>{this.props.balance}</Text>
-          </MyAppText>
-          <Image
-            source={require('../assets/images/icon-tree3.png')}
-            style={styles.icon}
-            resizeMode="contain"
-          />
-        </View>
+        {this.renderStandardTitle()}
+        {this.renderBalance()}
       </View>
     );
   }
 }
 
+
+
 const styles = StyleSheet.create({
   headerContainerStyle: {
     flex: 1,
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     paddingLeft: 15,
     paddingRight: 15,
@@ -85,20 +99,27 @@ const styles = StyleSheet.create({
     flex: 1
   },
   titleTextContainerStyle: {
-    flex: 5
+    flex: 3,
+    alignItems: 'center',
   },
   titleTextStyle: {
-    fontSize: 28,
-    color: 'white'
+    fontSize: 40,
+    lineHeight: 72, 
+    color: 'white',
+    letterSpacing: 15
   },
   balanceTextContainerStyle: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
   balanceTextStyle: {
     fontSize: 18,
-    lineHeight: 30,
-    color: 'white'
+    lineHeight: 30
+  },
+  wordmark: {
+    width: 85,
+    height: 28,
   },
   icon: {
     width: 24,
