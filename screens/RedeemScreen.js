@@ -25,7 +25,7 @@ class RedeemScreen extends React.Component {
           data={this.props.redeemables}
           renderItem={this.renderRow.bind(this)}
           keyExtractor={(item, index) => index.toString()}
-          ItemSeparatorComponent={() => (<View style={{ height: 2, backgroundColor: '#999' }} />)}
+          ItemSeparatorComponent={() => (<View style={{ height: 3, backgroundColor: '#bbb' }} />)}
         />
     );
   }
