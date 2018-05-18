@@ -58,7 +58,7 @@ class HomeScreen extends React.Component {
             Earn Bonus TREES!
           </MyAppTitleText>
         </Text>
-        <Text style={{ fontSize: 16, lineHeight: 26, color: 'white' }}>Spend $100 or more at Trees before 3:00PM today and receive an extra 25 TREES!</Text>
+        <Text style={{ fontSize: 16, lineHeight: 26, color: 'white' }}>Spend $100 or more at Trees before 3PM today and get an extra 25 TREES!</Text>
       </View>
     );
   }
