@@ -23,12 +23,6 @@ export class MontserratBlack extends React.Component {
   }   
 }
 
-export class MontserratBold extends React.Component {
-  render() {
-    return <Text style={{ fontFamily: 'OpenSans-ExtraBold' }}>{this.props.children}</Text>;
-  }   
-}
-
 const applyLetterSpacing = (string, count = 1) => {
   if (typeof string === 'string') {
     return string.split('').join('\u200A'.repeat(count)).toUpperCase();

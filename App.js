@@ -42,14 +42,12 @@ export default class App extends React.Component {
     return Promise.all([
       Asset.loadAsync([
         require('./assets/images/trees_logo_w_words_small.png'),
-        require('./assets/images/vectorbluemountains.jpg'),
         require('./assets/images/bg-vector-trees.jpg'),
         require('./assets/images/logo-icon.png'),
         require('./assets/images/icon-tree3.png'),
         require('./assets/images/hat.jpg'),
         require('./assets/images/grinder.jpg'),
         require('./assets/images/buddah.jpg'),
-        require('./assets/images/island_grown.png'),
       ]),
       Font.loadAsync({
         // This is the font that we are using for our tab bar
@@ -58,7 +56,7 @@ export default class App extends React.Component {
         // to remove this if you are not using it in your app
         'OpenSans-ExtraBold': require('./assets/fonts/OpenSans-ExtraBold.ttf'),
         'OpenSans-Regular': require('./assets/fonts/OpenSans-Regular.ttf'),
-        'Teko-Medium': require('./assets/fonts/Teko-Medium.ttf'),
+        'OpenSans-Bold': require('./assets/fonts/OpenSans-Bold.ttf'),
         'Teko-Regular': require('./assets/fonts/Teko-Regular.ttf'),
       }),
     ]);

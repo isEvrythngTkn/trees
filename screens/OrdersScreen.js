@@ -51,7 +51,8 @@ class OrdersScreen extends React.Component {
           data={orders}
           renderItem={this.renderRow.bind(this)}
           keyExtractor={(item, index) => index.toString()}
-          contentContainerStyle={{ paddingBottom: 30 }}
+          contentContainerStyle={{ paddingBottom: 30, backgroundColor: 'white' }}
+          ItemSeparatorComponent={() => (<View style={{ height: 30, backgroundColor: '#eee' }} />)}
         />
       );
     }

@@ -28,6 +28,47 @@ class OrderListItem extends Component {
     this.props.navigation.navigate('OrderDetails', newProps);
   }
 
+  renderStatus(completed, completed_at) {
+    const status = completed ? 
+      `You picked up this order on ${moment(completed_at).format('ddd, MMM D, YYYY')}` : 
+      'You have not yet picked up this order.';
+
+    return (
+      <View style={styles.statusWrap}>
+        <Feather 
+          name={ completed ? 'check-circle' : 'alert-circle'} 
+          size={20} 
+          color={ completed ? 'green' : '#daa50f' }
+          style={{ marginRight: 10 }} />
+        <MyAppText>{status}</MyAppText>
+      </View>
+    );
+  }
+
+  renderDetailsButton() {
+    return (
+      <View style={styles.buttonWrap}>
+        <Button 
+          title="View Details" 
+          onPress={this.viewOrderDetails.bind(this)}
+          containerViewStyle={styles.buttonContainer}
+          backgroundColor='#444'
+          icon={{name: 'add-circle', color: '#74d3b3' }}
+          />
+      </View>
+    );
+  }
+
+  renderImage(image_key) {
+    return (
+      <Image 
+        style={{ width: 75, height: 75, borderColor: '#ccc', borderWidth: .5 }}
+        source={productShots[image_key]}
+        resizeMode='contain'
+      />
+    );
+  }
+
   render() {
     const { 
       title,
@@ -41,54 +82,44 @@ class OrderListItem extends Component {
       completed_at 
     } = this.props.order;
 
-    const status = completed ? 
-      `You picked up this order on ${moment(completed_at).format('ddd, MMM D, YYYY')}` : 'You have not yet picked up this order.';
+    const ordered = `Ordered on ${moment(created).format('MMM D, YYYY')}`;
 
     return (
-      <Card title={`Ordered on ${moment(created).format('MMM D, YYYY')}`} titleStyle={styles.date}>
-        <View>
-          <View style={{ flex: 1, flexDirection: 'row' }}>
-            <Image 
-              style={{ width: 75, height: 75, borderColor: '#ccc', borderWidth: .5 }}
-              source={productShots[image_key]}
-              resizeMode='contain'
-            />
-            <View style={{ marginLeft: 10}}>
-              <MyAppTitleText>
-                <Text style={styles.title}>
-                  {title}
-                </Text>
-              </MyAppTitleText>
-              <Text style={styles.price}>{price} TREES</Text>
-            </View>
-          </View>
-          <View style={styles.statusWrap}>
-            <Feather 
-              name={ completed ? 'check-circle' : 'alert-circle'} 
-              size={20} 
-              color={ completed ? 'green' : '#daa50f' }
-              style={{ marginRight: 10 }} />
-            <MyAppText>{status}</MyAppText>
-          </View>
-          <View style={styles.buttonWrap}>
-            <Button 
-              title="View Details" 
-              onPress={this.viewOrderDetails.bind(this)}
-              containerViewStyle={styles.buttonContainer}
-              backgroundColor='#444'
-              icon={{name: 'add-circle', color: '#74d3b3' }}
-              />
+      <View style={styles.orderWrap}>
+        <View style={styles.dateWrap}>
+          <Text style={styles.date}>
+            <MyAppText>
+              {ordered}
+            </MyAppText>
+          </Text>
+        </View>
+        <View style={{ flex: 1, flexDirection: 'row' }}>
+          <View>
+            <MyAppTitleText>
+              <Text style={styles.title}>
+                {title}
+              </Text>
+            </MyAppTitleText>
+            <Text style={styles.price}>{price} TREES</Text>
           </View>
         </View>
-      </Card>
+        {this.renderStatus(completed, completed_at)}
+        {this.renderDetailsButton()}
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  orderWrap: {
+    padding: 30,
+  },
+  dateWrap: {
+    marginBottom: 15,
+  },
   date: { 
-    fontSize: 14, 
-    textAlign: 'left' 
+    fontSize: 18, 
+    fontFamily: 'OpenSans-Bold'
   },
   statusWrap: {
     alignItems: 'center',
@@ -103,10 +134,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   title: {
-    fontSize: 18
+    fontSize: 28,
   },
   price: {
-    fontSize: 14
+    fontSize: 16
   },
   buttonWrap: { 
     flex: 1, 
