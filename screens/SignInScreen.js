@@ -11,6 +11,7 @@ import {
   Image,
   Text,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, FormLabel, FormInput, Button } from 'react-native-elements';
@@ -168,39 +169,31 @@ class SignInScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Image
-          source={require('../assets/images/trees_logo_w_words_small.png')}
-          style={styles.logo}
-          resizeMode="contain" />
-          <View style={styles.formWrapper}>
-            {content}
-          </View>
+        <ScrollView contentContainerStyle={styles.scrollview}>
+          <Image
+            source={require('../assets/images/trees_logo_w_words_small.png')}
+            style={styles.logo}
+            resizeMode="contain" />
+            <View style={styles.formWrapper}>
+              {content}
+            </View>
+        </ScrollView>
       </View>
     );
   }
-
-  // render() {
-  //   
-  //   return (
-  //     <ImageBackground 
-  //         source={require('../assets/images/signin.jpg')}
-  //         style={styles.container}
-  //         resizeMode="cover"
-  //         >
-  //         {content}
-  //     </ImageBackground>
-  //   );
-  // }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
+  },
+  scrollview: {
     paddingTop: 80,
     paddingLeft: 50, 
     paddingRight: 50,
+    paddingBottom: 50,
     alignItems: 'center',
-    backgroundColor: '#fff',
   },
   logo: {
     width: 180,
