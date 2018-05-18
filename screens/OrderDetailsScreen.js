@@ -159,19 +159,19 @@ const styles = StyleSheet.create({
   },
   orderHeader: {
     padding: 30,
-    paddingTop: 50,
-    paddingBottom: 70,
+    paddingTop: 40,
+    paddingBottom: 40,
   },
   priceWrap: {
     flexDirection: 'row',
     justifyContent: 'center',
   },
   dateWrapper: {
-    alignItems: 'center',
-    flex: 1,
+    alignItems: 'center'
   },
   date: {
     fontSize: 16,
+    color: '#333'
   },
   dataPointsWrapper: { 
     marginTop: 0, 

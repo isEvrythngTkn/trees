@@ -33,6 +33,8 @@ class NewHeader extends React.Component {
           </TouchableOpacity>
         </View>
       );
+    } else {
+      <View style={styles.hamburger} />
     }
   }
 
@@ -54,15 +56,6 @@ class NewHeader extends React.Component {
     );
   }
 
-  renderWordMark() {
-    return (
-      <Image
-        source={require('../assets/images/trees_wordmark.png')}
-        style={styles.wordmark}
-        resizeMode="contain" />
-    );
-  }
-
   renderStandardTitle() {
     return (
       <View style={styles.titleTextContainerStyle}>
@@ -76,7 +69,6 @@ class NewHeader extends React.Component {
   }
 
   render() {
-    //const title = this.props.wordmark ? this.renderWordMark() : this.renderStandardTitle();
     return (
       <View style={styles.headerContainerStyle}>
         {this.renderHamburger()}
@@ -109,8 +101,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     lineHeight: 62,
     marginTop: 8, 
-    color: 'white',
-    letterSpacing: 15
+    color: 'white'
   },
   balanceTextContainerStyle: {
     flex: 1,
@@ -120,10 +111,6 @@ const styles = StyleSheet.create({
   balanceTextStyle: {
     fontSize: 18,
     lineHeight: 30
-  },
-  wordmark: {
-    width: 85,
-    height: 28,
   },
   icon: {
     width: 24,
