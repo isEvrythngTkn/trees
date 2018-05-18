@@ -14,16 +14,16 @@ export const userPlays = ({ userToken, uuid, kind }) => {
 
     const index = getRandomArbitrary(0, 3);
     kind = wins[index];
-    //if (Math.random() >= 0.5) {
-    userWins(dispatch, uuid, kind);
-    //} else {
-    //  userLoses(dispatch);
-    // }
+    if (Math.random() >= 0.3) {
+      userWins(dispatch, uuid, kind);
+    } else {
+      userLoses(dispatch);
+    }
   };
 };
 
 const getRandomArbitrary = (min, max) => {
-    return Math.floor(Math.random() * max) + min;
+  return Math.floor(Math.random() * max) + min;
 }
 
 const userWins = async (dispatch, uuid, kind) => {
@@ -33,7 +33,7 @@ const userWins = async (dispatch, uuid, kind) => {
     // forced delay so it seems like something is happening
     setTimeout(() => {
       dispatch({ type: USER_WIN, payload: kind });  
-    }, 0);
+    }, 4000);
     
   } catch (err) {
     console.log('Failed to transfer funds', err);
@@ -45,7 +45,7 @@ const userWins = async (dispatch, uuid, kind) => {
 const userLoses = (dispatch) => {
   setTimeout(() => {
     dispatch({ type: USER_LOSE });
-  }, 5000);
+  }, 4000);
 }
 
 export const playAgain = () => {
