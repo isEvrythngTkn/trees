@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { connect } from 'react-redux';
 import { getNavigationOptions } from '../navigation/NavigationOptions';
 import Item from '../components/Item';
@@ -25,10 +25,7 @@ class RedeemScreen extends React.Component {
           data={this.props.redeemables}
           renderItem={this.renderRow.bind(this)}
           keyExtractor={(item, index) => index.toString()}
-          contentContainerStyle={{
-            backgroundColor: '#eee',
-            paddingBottom: 30
-          }}
+          ItemSeparatorComponent={() => (<View style={{ height: 2, backgroundColor: '#999' }} />)}
         />
     );
   }
